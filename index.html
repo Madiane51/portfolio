@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madiane Sahli - Ingénieur Cybersécurité</title>
+<meta name="description" content="Madiane Sahli - Ingénieur Cybersécurité. Expert GRC, ISO 27001, Risk Management.">
+<meta name="keywords" content="cybersécurité, GRC, RSSI, ISO 27001, consultant sécurité, Madiane Sahli">
+<meta property="og:title" content="Madiane Sahli - Ingénieur Cybersécurité">
+<meta property="og:description" content="Portfolio cybersécurité - Expert GRC, ISO 27001, Risk Management">
+<meta property="og:url" content="https://madiane.tech">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==================== ORIGINAL CSS (UNCHANGED) ==================== */
+:root {
+  --bg: #050810;
+  --bg2: #080d1a;
+  --surface: #0d1426;
+  --surface2: #121a30;
+  --border: rgba(56, 139, 253, 0.15);
+  --accent: #00d4ff;
+  --accent2: #0066ff;
+  --accent3: #00ff88;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --danger: #ff4757;
+  --warn: #ffa502;
+  --glow: 0 0 40px rgba(0, 212, 255, 0.12);
+  --glow2: 0 0 80px rgba(0, 102, 255, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, background 0.2s;
+  box-shadow: 0 0 15px var(--accent);
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+.cursor.active { transform: translate(-50%, -50%) scale(1.5); background: var(--accent3); }
+.cursor-ring.active { width: 50px; height: 50px; border-color: var(--accent3); }
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s;
+  backdrop-filter: blur(0px);
+}
+nav.scrolled {
+  background: rgba(5, 8, 16, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 3rem;
+}
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+.nav-logo span { color: var(--text3); }
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.nav-cta:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+}
+
+/* SECTIONS */
+section { padding: 8rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* SECTION HEADERS */
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.section-title span { color: var(--accent); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 102, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 102, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, transparent 70%);
+  top: -100px; right: -100px;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  bottom: 0; left: 10%;
+  animation-delay: -4s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 0.4rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s forwards 0.3s;
+}
+.status-dot {
+  width: 7px; height: 7px;
+  background: var(--accent3);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent3);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.hero-status span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 0.95;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s forwards 0.5s;
+}
+.hero-name .first { color: var(--text); display: block; }
+.hero-name .last {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  display: block;
+}
+.hero-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.7s forwards 0.7s;
+}
+.hero-tagline .sep { color: var(--text3); margin: 0 0.8rem; }
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--text2);
+  max-width: 540px;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.7s forwards 0.9s;
+}
+.hero-actions {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s forwards 1.1s;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.9rem 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s;
+}
+.btn-primary:hover { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+.btn-primary:hover::before { transform: scaleX(1); transform-origin: left; }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 0.9rem 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* HERO TERMINAL */
+.hero-terminal {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 480px;
+  opacity: 0;
+  animation: fadeLeft 0.9s forwards 1.2s;
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateY(-50%) translateX(40px); }
+  to { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+.terminal-window {
+  background: rgba(13, 20, 38, 0.9);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--glow), 0 40px 80px rgba(0,0,0,0.5);
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(5, 8, 16, 0.6);
+}
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot.r { background: #ff5f57; }
+.t-dot.y { background: #febc2e; }
+.t-dot.g { background: #28c840; }
+.terminal-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text3);
+  margin-left: auto;
+  letter-spacing: 1px;
+}
+.terminal-body { padding: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.75rem; line-height: 2; height: 350px; overflow-y: auto; }
+.t-line { display: flex; gap: 0.5rem; }
+.t-prompt { color: var(--accent3); flex-shrink: 0; }
+.t-cmd { color: var(--text); }
+.t-out { color: var(--text2); padding-left: 1rem; }
+.t-out.accent { color: var(--accent); }
+.t-out.green { color: var(--accent3); }
+.t-out.warn { color: var(--warn); }
+.t-cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s forwards 1.5s;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+}
+.scroll-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* STATS BAR */
+.stats-bar {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 2rem 0;
+}
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.stat-item { padding: 1.5rem 2rem; border-right: 1px solid var(--border); text-align: center; }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--accent); display: block; line-height: 1; margin-bottom: 0.3rem; }
+.stat-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); text-transform: uppercase; letter-spacing: 2px; }
+
+/* ABOUT */
+#about { background: var(--bg2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+.about-visual { position: relative; }
+.about-avatar-wrap { position: relative; width: 320px; height: 380px; }
+.about-avatar-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg2) 100%);
+  border: 1px solid var(--border);
+  clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
+}
+.about-initials {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Syne', sans-serif; font-size: 6rem; font-weight: 800; color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 212, 255, 0.3); user-select: none;
+}
+.about-badge {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--surface2); border: 1px solid var(--border); padding: 1rem 1.5rem;
+  box-shadow: var(--glow);
+}
+.badge-label {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent);
+  letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 0.3rem;
+}
+.badge-value { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text); }
+.about-decoration {
+  position: absolute; top: -20px; left: -20px; width: 80px; height: 80px;
+  border: 1px solid rgba(0, 212, 255, 0.2); border-right: none; border-bottom: none;
+}
+.about-content p { color: var(--text2); line-height: 1.9; margin-bottom: 1.5rem; font-size: 1.02rem; }
+.about-content p strong { color: var(--text); font-weight: 500; }
+.about-highlight {
+  display: inline-block; background: rgba(0, 212, 255, 0.08);
+  border-left: 2px solid var(--accent); padding: 1rem 1.5rem;
+  margin: 1rem 0; font-style: italic; color: var(--text);
+}
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+.tag {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent);
+  border: 1px solid rgba(0, 212, 255, 0.25); padding: 0.3rem 0.8rem;
+  letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s;
+}
+.tag:hover { background: rgba(0, 212, 255, 0.1); }
+.lang-badges { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.2rem }
+.lang-badge { display:flex; align-items:center; gap:.5rem; background:var(--surface); border:1px solid var(--border); padding:.4rem .9rem; font-size:.82rem; color:var(--text2) }
+.lang-level { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--text3); letter-spacing:1px }
+
+/* EXPERIENCE */
+.exp-grid { display: grid; gap: 2rem; }
+.exp-card {
+  background: var(--surface); border: 1px solid var(--border); padding: 2.5rem;
+  position: relative; transition: all 0.3s; overflow: hidden;
+}
+.exp-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+}
+.exp-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.exp-card:hover { border-color: rgba(0, 212, 255, 0.3); transform: translateY(-3px); box-shadow: var(--glow); }
+.exp-card:hover::after { opacity: 1; }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+.exp-role { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); }
+.exp-company { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-top: 0.3rem; letter-spacing: 1px; }
+.exp-period {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3);
+  letter-spacing: 1px; white-space: nowrap; border: 1px solid var(--border);
+  padding: 0.3rem 0.8rem; text-transform: uppercase;
+}
+.exp-desc { color: var(--text2); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.exp-missions { list-style: none; display: grid; gap: 0.5rem; }
+.exp-missions li { color: var(--text2); font-size: 0.9rem; padding-left: 1.5rem; position: relative; line-height: 1.6; }
+.exp-missions li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+.exp-skills-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.chip {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem;
+  background: rgba(0, 102, 255, 0.1); border: 1px solid rgba(0, 102, 255, 0.2);
+  color: var(--accent2); padding: 0.25rem 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* SKILLS */
+#skills { background: var(--bg2); }
+.skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.skill-category { margin-bottom: 3rem; }
+.skill-cat-title {
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent3);
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; display: flex;
+  align-items: center; gap: 0.8rem;
+}
+.skill-cat-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.skill-item { margin-bottom: 1.2rem; }
+.skill-info { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.skill-name { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+.skill-pct { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); }
+.skill-bar { height: 3px; background: var(--surface2); position: relative; overflow: hidden; }
+.skill-bar-fill {
+  height: 100%; background: linear-gradient(to right, var(--accent2), var(--accent));
+  transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.skill-bar-fill::after {
+  content: ''; position: absolute; right: 0; top: -1px; width: 6px; height: 5px;
+  background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent);
+}
+.skill-bar-fill.animated { transform: scaleX(1); }
+.skills-visual { display: grid; gap: 1rem; }
+.tool-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.tool-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--surface);
+  border: 1px solid var(--border); padding: 0.5rem 1rem; font-size: 0.8rem; color: var(--text); transition: all 0.2s;
+}
+.tool-badge:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,212,255,0.1); }
+.tool-badge .ico { font-size: 1rem; }
+
+/* CERTIFICATIONS */
+.certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.cert-card {
+  background: var(--surface); border: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center;
+  position: relative; overflow: hidden; transition: all 0.3s;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+.cert-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--accent2), var(--accent));
+}
+.cert-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0, 102, 255, 0.2), var(--glow); border-color: rgba(0, 212, 255, 0.3); }
+.cert-icon { font-size: 3rem; margin-bottom: 1.5rem; display: block; filter: grayscale(0.2); }
+.cert-badge-label {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--accent);
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.8rem; display: block;
+}
+.cert-name {
+  font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.5rem; line-height: 1.3;
+}
+.cert-body {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.cert-verified {
+  display:inline-flex; align-items:center; gap:.4rem; font-family:'Space Mono',monospace;
+  font-size:.6rem;color:var(--accent3); border:1px solid rgba(0,255,136,.25);
+  padding:.3rem .8rem; letter-spacing:1px; text-decoration:none; transition:all .2s
+}
+.cert-verified:hover { background:rgba(0,255,136,.1) }
+.cert-pending{
+  display:inline-flex; align-items:center; gap:.4rem; font-family:'Space Mono',monospace;
+  font-size:.6rem; color:var(--warn); border:1px solid rgba(255,165,2,.25);
+  padding:.3rem .8rem; letter-spacing:1px
+}
+
+/* PROJECTS */
+#projects { background: var(--bg2); }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.project-card {
+  background: var(--surface); border: 1px solid var(--border); overflow: hidden;
+  transition: all 0.3s; cursor: pointer; position: relative;
+}
+.project-card:hover { border-color: rgba(0, 212, 255, 0.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), var(--glow); }
+.project-header { padding: 2rem; border-bottom: 1px solid var(--border); position: relative; }
+.project-number { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 2px; margin-bottom: 1rem; }
+.project-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.project-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.project-type { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+.project-body { padding: 2rem; }
+.project-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; }
+.project-meta { display: grid; gap: 0.6rem; margin-bottom: 1.5rem; }
+.meta-row { display: flex; gap: 0.8rem; font-size: 0.82rem; }
+.meta-key {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3);
+  letter-spacing: 1px; text-transform: uppercase; min-width: 90px; flex-shrink: 0;
+}
+.meta-val { color: var(--text2); }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.p-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 102, 255, 0.15); color: var(--accent2); padding: 0.2rem 0.6rem; letter-spacing: 1px;
+}
+.project-status {
+  position: absolute; top: 1.5rem; right: 1.5rem; font-family: 'Space Mono', monospace;
+  font-size: 0.6rem; padding: 0.2rem 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+}
+.status-complete { background: rgba(0, 255, 136, 0.1); color: var(--accent3); border: 1px solid rgba(0, 255, 136, 0.2); }
+.status-ongoing { background: rgba(255, 165, 2, 0.1); color: var(--warn); border: 1px solid rgba(255, 165, 2, 0.2); }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 3rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--accent), var(--accent2), transparent);
+}
+.timeline-item { position: relative; margin-bottom: 3.5rem; opacity: 0; transform: translateX(-20px); transition: all 0.5s; }
+.timeline-item.visible { opacity: 1; transform: translateX(0); }
+.timeline-dot {
+  position: absolute; left: -3.45rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+.timeline-dot.edu { border-color: var(--accent3); box-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
+.timeline-dot.cert { border-color: var(--warn); box-shadow: 0 0 15px rgba(255, 165, 2, 0.5); }
+.timeline-date { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.timeline-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+.timeline-sub { font-size: 0.88rem; color: var(--accent); margin-bottom: 0.5rem; }
+.timeline-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.7; }
+.timeline-type {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 1px;
+  text-transform: uppercase; padding: 0.2rem 0.6rem; margin-bottom: 0.5rem; display: inline-block;
+}
+.type-exp { background: rgba(0, 212, 255, 0.08); color: var(--accent); border: 1px solid rgba(0, 212, 255, 0.2); }
+.type-edu { background: rgba(0, 255, 136, 0.08); color: var(--accent3); border: 1px solid rgba(0, 255, 136, 0.2); }
+.type-cert { background: rgba(255, 165, 2, 0.08); color: var(--warn); border: 1px solid rgba(255, 165, 2, 0.2); }
+
+/* CONTACT */
+#contact { background: var(--bg2); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.contact-info h3 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; line-height: 1.2; }
+.contact-info p { color: var(--text2); line-height: 1.8; margin-bottom: 2rem; }
+.contact-links { display: grid; gap: 1rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem; color: var(--text2); text-decoration: none;
+  padding: 1rem; border: 1px solid var(--border); background: var(--surface); transition: all 0.2s; font-size: 0.9rem;
+}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(5px); }
+.contact-link-icon { font-size: 1.2rem; }
+.contact-link-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.2rem; }
+.contact-form { display: grid; gap: 1.5rem; }
+.form-group { display: grid; gap: 0.5rem; }
+.form-group label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; }
+.form-group input, .form-group textarea {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  padding: 0.9rem 1.2rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.9rem;
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.1); }
+.form-group textarea { resize: vertical; min-height: 140px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-submit {
+  width: 100%; background: var(--accent); border: none; color: var(--bg); padding: 1rem;
+  font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer; font-weight: 700; transition: all 0.2s;
+}
+.form-submit:hover { background: var(--accent2); box-shadow: 0 0 40px rgba(0, 212, 255, 0.4); }
+.form-note { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem; }
+
+/* FOOTER */
+footer { padding: 3rem 0; border-top: 1px solid var(--border); text-align: center; }
+.footer-logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text3); margin-bottom: 1rem; }
+.footer-copy { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text3); letter-spacing: 2px; }
+.footer-copy span { color: var(--accent); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* MOBILE NAV */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+.nav-hamburger span { width: 24px; height: 1.5px; background: var(--text2); transition: all 0.3s; display: block; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  /* Hero Layout Tablet/Mobile */
+  #hero .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem; /* Space for nav */
+  }
+  
+  .hero-content {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+  }
+  
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+
+  /* Terminal Adaptation (Not hidden anymore) */
+  .hero-terminal {
+    position: relative;
+    right: auto; top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    animation: fadeUp 0.9s forwards 1.2s; /* Changed animation direction */
+  }
+  
+  .terminal-window {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  
+  .terminal-body {
+    height: 220px; /* Compact height */
+  }
+
+  /* Grids */
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-avatar-wrap { width: 280px; height: 340px; margin: 0 auto; }
+  .about-initials { font-size: 4rem; }
+  .about-badge { bottom: -10px; right: 0; }
+  
+  .skills-layout { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid .stat-item:nth-child(2) { border-right: none; }
+  .stat-item { border-bottom: 1px solid var(--border); }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  nav.scrolled { padding: 0.8rem 1.5rem; }
+  
+  /* Mobile Menu Overlay */
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 16, 0.98);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    height: 100vh;
+    padding-bottom: 4rem; /* Space for bottom UI if needed */
+  }
+  
+  .nav-links.open {
+    display: flex; /* Ensure flex is active */
+    transform: translateX(0);
+  }
+  
+  .nav-links a {
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .nav-links.open {
+    display: flex; flex-direction: column; position: fixed; inset: 0;
+    background: var(--bg); align-items: center; justify-content: center;
+    gap: 2rem; z-index: 999;
+  }
+  .nav-links.open a { font-size: 1.2rem; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; z-index: 1001; }
+  section { padding: 5rem 0; }
+  
+  /* Form & Inputs */
+  .form-row { grid-template-columns: 1fr; }
+  input, textarea, select { font-size: 16px !important; } /* Prevent iOS Zoom */
+  
+  /* Stats Mobile */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  
+  /* Timeline Mobile Fix */
+  .timeline { padding-left: 2rem; }
+  .timeline-dot { left: -2.45rem; }
+  
+  /* Hero Typography */
+  .hero-name { font-size: 13vw; }
+  .section-title { font-size: 2rem; }
+  
+  /* Boot Screen Fix */
+  .boot-content { width: 85%; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1rem; }
+  .stat-item:last-child { border-bottom: none; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+}
+
+/* FIX chevauchement date / dot (mobile) */
+@media (max-width: 768px) {
+  #timeline .timeline { 
+    padding-left: 2.8rem !important;  /* + d'espace pour le texte */
+  }
+
+  #timeline .timeline::before { 
+    left: 1.1rem !important;          /* aligne le trait */
+  }
+
+  #timeline .timeline-dot { 
+    left: -2.45rem !important;        /* remet la puce à gauche (hors texte) */
+  }
+}
+
+
+/* GLITCH */
+.glitch { position: relative; }
+.glitch::before, .glitch::after {
+  content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+.glitch::before {
+  animation: glitch1 3s infinite; color: var(--accent);
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); opacity: 0;
+}
+.glitch::after {
+  animation: glitch2 3s infinite; color: var(--danger);
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); opacity: 0;
+}
+@keyframes glitch1 {
+  0%, 85%, 100% { opacity: 0; transform: translateX(0); }
+  87% { opacity: 0.3; transform: translateX(-5px); }
+  89% { opacity: 0; }
+  92% { opacity: 0.2; transform: translateX(3px); }
+  94% { opacity: 0; }
+}
+@keyframes glitch2 {
+  0%, 85%, 100% { opacity: 0; transform: translateX(0); }
+  88% { opacity: 0.2; transform: translateX(5px); }
+  90% { opacity: 0; }
+  93% { opacity: 0.15; transform: translateX(-3px); }
+  95% { opacity: 0; }
+}
+
+/* === RESPONSIVE PATCH v2 === */
+/* Global Overflow Fix */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Burger Animation */
+.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Staggered Menu Animation */
+.nav-links.open a:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(3) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(4) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(5) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(6) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.nav-links.open a:nth-child(7) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+/* ==================== NEW CSS: MULTILANG & ANIMATION ==================== */
+
+/* LANG TOGGLE */
+.nav-lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text3);
+    margin-right: 1.5rem;
+    z-index: 1002;
+    transition: transform 0.1s;
+}
+.nav-lang-toggle:active { transform: scale(0.95); }
+.lang-opt { position: relative; padding: 0.2rem 0; transition: color 0.3s; }
+.lang-opt.active { color: var(--accent); text-shadow: 0 0 10px rgba(0,212,255,0.4); font-weight: 700; }
+.lang-sep { color: var(--border); }
+
+/* SYSTEM REBOOT OVERLAY (CRT EFFECT) */
+.boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: #000;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.boot-content {
+    font-family: 'Space Mono', monospace;
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-align: left;
+    width: 300px;
+}
+
+.boot-log {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.boot-progress {
+    width: 100%;
+    height: 4px;
+    background: #1a1a1a;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.boot-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* TOUCH DEVICES CURSOR RESET */
+@media (hover: none) and (pointer: coarse) {
+    .cursor, .cursor-ring { display: none !important; }
+    body { cursor: auto; }
+    a, button, .exp-card, .project-card, .cert-card, .tool-badge, .tag, .nav-lang-toggle { cursor: pointer; }
+}
+
+/* CRT ANIMATIONS */
+.crt-shutdown {
+    animation: turn-off 0.55s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.crt-boot {
+    animation: turn-on 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes turn-off {
+  0% { transform: scale(1, 1.3) translate3d(0, 0, 0); filter: brightness(1); opacity: 1; }
+  60% { transform: scale(1, 0.001) translate3d(0, 0, 0); filter: brightness(10); }
+  100% { transform: scale(0, 0.001) translate3d(0, 0, 0); filter: brightness(50); opacity: 0; }
+}
+
+@keyframes turn-on {
+  0% { transform: scale(0, 0.001) translate3d(0, 0, 0); filter: brightness(30); opacity: 0; }
+  60% { transform: scale(1, 0.001) translate3d(0, 0, 0); filter: brightness(10); opacity: 1; }
+  100% { transform: scale(1, 1) translate3d(0, 0, 0); filter: brightness(1); opacity: 1; }
+}
+
+/* BLINKING CURSOR IN BOOT */
+.b-cursor {
+    display: inline-block;
+    width: 8px; height: 15px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 0.1s infinite;
+}
+
+/* Keyframe animations handled in JS via class triggers for precise timing */
+
+/* Mobile adjustment for toggle */
+@media (max-width: 768px) {
+    .nav-lang-toggle { margin-right: 0.5rem; font-size: 0.8rem; }
+}
+
+/* === FIX TIMELINE (PARCOURS) MOBILE/TABLET === */
+@media (max-width: 1024px) {
+  /* Le wrapper inline du #timeline force 2 colonnes => on force 1 colonne */
+  #timeline .container > div {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* La timeline doit prendre toute la largeur */
+  #timeline .timeline {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  #timeline .container > div {
+    gap: 2rem !important;
+  }
+
+  /* Ajuste l’alignement du trait/dots */
+  #timeline .timeline { padding-left: 2rem; }
+  #timeline .timeline::before { left: 0.75rem; }
+  /* #timeline .timeline-dot { left: 0.35rem; } */
+}
+
+/* === FIX: dates Experience (mobile/tablette) === */
+@media (max-width: 1024px) {
+  .exp-header{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exp-period{
+    align-self: flex-start;
+    margin-top: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-card{ padding: 2rem 1.5rem; } /* un peu moins large */
+  .exp-period{
+    font-size: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    letter-spacing: 0.5px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; /* au cas où */
+  }
+}
+
+
+/* === FIX: Security Dashboard bars align === */
+.sd-grid { display: grid; gap: 0.8rem; }
+
+.sd-row{
+  display: grid !important;
+  grid-template-columns: 220px 110px 45px; /* label | bars | score */
+  align-items: center;
+  column-gap: 12px;
+}
+
+.sd-label{ color: var(--text2); }
+
+.sd-bars{
+  display: grid !important;
+  grid-template-columns: repeat(5, 18px);
+  gap: 3px;
+  justify-content: start;
+}
+
+.sd-score{ text-align: right; }
+
+/* responsive: en mobile, ça passe en 2 lignes si besoin */
+@media (max-width: 480px){
+  .sd-row{
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+  .sd-score{ text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="boot-screen" id="bootScreen">
+    <div class="boot-content">
+        <div class="boot-log" id="bootLog"></div>
+        <div class="boot-progress"><div class="boot-bar" id="bootBar"></div></div>
+    </div>
+</div>
+
+<div id="main-wrapper">
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">MS<span>//</span>SEC</a>
+  
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Expérience</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
+    <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+    <li><a href="#timeline" data-i18n="nav.timeline">Parcours</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+
+  <div style="display:flex; align-items:center;">
+    <div class="nav-lang-toggle" id="langToggle" tabindex="0" role="button" aria-label="Change Language">
+        <span class="lang-opt active" data-lang="fr">FR</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-opt" data-lang="en">EN</span>
+    </div>
+
+    <a href="#contact" class="nav-cta" data-i18n="nav.cta">Me contacter</a>
+    
+    <div class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="container" style="width:100%;">
+    <div class="hero-content">
+      <div class="hero-status">
+        <div class="status-dot"></div>
+        <span data-i18n="hero.status">Disponible - Poste à temps plein · Sept. 2026</span>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="first">Madiane</span>
+        <span class="last glitch" data-text="Sahli.">Sahli.</span>
+      </h1>
+
+      <p class="hero-tagline" data-i18n="hero.title">
+        Ingénieur Cybersécurité
+      </p>
+
+      <p class="hero-desc" data-i18n="hero.bio">
+        Expert GRC, certifié ISO/IEC 27001 Lead Implementer & Lead Auditor, ISO/IEC 27005 Risk Manager. Assistant RSSI à la Mairie de Châlons-en-Champagne - je sécurise les SI, pilote les risques et prépare les organisations à la menace post-quantique.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary"><span data-i18n="hero.btnProjects">→ Voir mes projets</span></a>
+        <a href="https://www.linkedin.com/in/madiane-sahli/" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <div class="t-dot r"></div>
+        <div class="t-dot y"></div>
+        <div class="t-dot g"></div>
+        <span class="terminal-title">security_profile.sh</span>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-label" data-i18n="stats.certs">Certifications ISO</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="2">0</span>
+        <span class="stat-label" data-i18n="stats.years">Années d'expérience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="6">0</span>
+        <span class="stat-label" data-i18n="stats.projects">Projets réalisés</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="100">0</span>
+        <span class="stat-label" data-i18n="stats.engagement">% Engagement sécurité</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal-left">
+        <div class="about-decoration"></div>
+        <div class="about-avatar-wrap">
+          <div class="about-avatar-bg"></div>
+          <div class="about-initials">MS</div>
+          <div class="about-badge">
+            <span class="badge-label" data-i18n="about.badgeLabel">Spécialité</span>
+            <span class="badge-value">GRC & ISO 27001</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <span class="section-label" data-i18n="nav.about">À propos</span>
+        <h2 class="section-title" data-i18n="about.title">Passionné par la <span>sécurité</span> des systèmes d'information</h2>
+        <p data-i18n="about.p1">
+          Étudiant en <strong>Master 2 Réseaux & Télécommunications</strong> (spécialisation Administration et sécurité des réseaux) à l'Université de Reims Champagne-Ardenne, j'exerce simultanément en tant qu'<strong>Assistant RSSI</strong> à la DSI de la Mairie de Châlons-en-Champagne.
+        </p>
+        <blockquote class="about-highlight" data-i18n="about.quote">
+          "La sécurité ne s'improvise pas - elle se construit, se gouverne, et s'adapte continuellement aux menaces émergentes."
+        </blockquote>
+        <p data-i18n="about.p2">
+          Titulaire de trois certifications internationales (ISO 27001 LI, ISO 27001 LA, ISO 27005 RM), je conduis des missions stratégiques : cartographie du SI, gestion des risques, politiques SSI, et je pilote un <strong>projet pionnier de transition vers la cryptographie post-quantique (PQC)</strong> - incluant l'inventaire des mécanismes cryptographiques et l'identification des dépendances.
+        </p>
+        <p data-i18n="about.p3">
+          Mobilité internationale - disponible à temps plein à partir de <strong>septembre 2026</strong>.
+        </p>
+        <div class="lang-badges">
+          <div class="lang-badge" data-i18n="about.lang1">🇫🇷 Français <span class="lang-level">- Natif</span></div>
+          <div class="lang-badge" data-i18n="about.lang2">🇬🇧 English <span class="lang-level">- B2 Professional</span></div>
+          <div class="lang-badge" data-i18n="about.lang3">🇪🇸 Español <span class="lang-level">- B1</span></div>
+        </div>
+        <div class="about-tags">
+          <span class="tag">ISO 27001</span>
+          <span class="tag">ISO 27005</span>
+          <span class="tag">EBIOS RM</span>
+          <span class="tag">GRC</span>
+          <span class="tag">Audit SI</span>
+          <span class="tag">Post-Quantum</span>
+          <span class="tag">Architecture sécu</span>
+          <span class="tag">SIEM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label" data-i18n="nav.experience">Expérience</span>
+      <h2 class="section-title" data-i18n="exp.title">Parcours <span>professionnel</span></h2>
+    </div>
+    <div class="exp-grid" style="margin-top: 3rem;">
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="exp.job1.role">Assistant RSSI</div>
+            <div class="exp-company" data-i18n="exp.job1.company">DSI - Mairie de Châlons-en-Champagne, France</div>
+          </div>
+          <div class="exp-period" data-i18n="exp.job1.date">Août 2024 - Août 2026</div>
+        </div>
+        <p class="exp-desc" data-i18n="exp.job1.desc">
+          Mission en alternance au sein de la DSI d'une collectivité territoriale. En appui direct du RSSI, avec responsabilités sur la gouvernance SSI, la gestion des risques et la conformité. Rôle pivot entre équipes techniques, direction et métiers.
+        </p>
+        <ul class="exp-missions">
+          <li data-i18n="exp.job1.t1">Cartographie du système d'information - identification et documentation des composants, flux et dépendances</li>
+          <li data-i18n="exp.job1.t2">Collaboration sur des projets de sécurité interservices - mise en place de solutions conformes aux exigences organisationnelles</li>
+          <li data-i18n="exp.job1.t3">Rédaction de politiques et procédures de sécurité - protection des systèmes, données et contrôles d'accès</li>
+          <li data-i18n="exp.job1.t4">Formation et sensibilisation à la cybersécurité - éducation des utilisateurs sur les bonnes pratiques</li>
+          <li data-i18n="exp.job1.t5">Surveillance et gestion des incidents de sécurité - détection et réponse pour minimiser l'impact</li>
+          <li data-i18n="exp.job1.t6"><strong>Pilotage du projet de transition vers la cryptographie post-quantique (PQC)</strong> - inventaire des mécanismes cryptographiques et identification des dépendances</li>
+        </ul>
+        <div class="exp-skills-chips">
+          <span class="chip">Cartographie SI</span>
+          <span class="chip">GRC</span>
+          <span class="chip">Politiques SSI</span>
+          <span class="chip">Sensibilisation</span>
+          <span class="chip">Incident Response</span>
+          <span class="chip">PQC</span>
+          <span class="chip">ISO 27001</span>
+          <span class="chip">ISO 27005</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role" data-i18n="exp.job2.role">Analyste Programmeur</div>
+            <div class="exp-company" data-i18n="exp.job2.company">DSI - Mairie de Châlons-en-Champagne, France</div>
+          </div>
+          <div class="exp-period" data-i18n="exp.job2.date">Avril 2024 - Août 2024</div>
+        </div>
+        <p class="exp-desc" data-i18n="exp.job2.desc">
+          Stage de 4 mois au sein de la même DSI. Développement applicatif, maintenance du catalogue d'applications et optimisation des performances en environnement d'administration publique.
+        </p>
+        <ul class="exp-missions">
+          <li data-i18n="exp.job2.t1">Maintenance corrective et évolutive du catalogue d'applications de la collectivité</li>
+          <li data-i18n="exp.job2.t2">Optimisation des performances des applications métier</li>
+          <li data-i18n="exp.job2.t3">Développement d'APIs REST pour l'interconnexion des services</li>
+        </ul>
+        <div class="exp-skills-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Java</span>
+          <span class="chip">SQL</span>
+          <span class="chip">REST API</span>
+          <span class="chip">HTML/CSS/JS</span>
+          <span class="chip">Bash</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label" data-i18n="nav.skills">Compétences</span>
+      <h2 class="section-title" data-i18n="skills.title">Arsenal <span>technique</span></h2>
+    </div>
+    <div class="skills-layout" style="margin-top: 3.5rem;">
+      <div>
+        <div class="skill-category reveal">
+          <div class="skill-cat-title" data-i18n="skills.cat1">Gouvernance & GRC</div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name">ISO 27001 - SMSI</span><span class="skill-pct">95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name" data-i18n="skills.risk">ISO 27005 - Gestion des risques</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name">EBIOS Risk Manager</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name">NIS2 / DORA / RGPD</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name" data-i18n="skills.audit">Audit SI & conformité</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.88"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-cat-title" data-i18n="skills.cat2">Sécurité Technique</div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name" data-i18n="skills.netsec">Sécurité réseau & infrastructure</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name" data-i18n="skills.appsec">Sécurité applicative / OWASP</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name" data-i18n="skills.hardening">Hardening systèmes (Linux/Windows)</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.78"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span class="skill-name">Post-Quantum Cryptography (PQC)</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="0.70"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+            <div class="skill-cat-title" data-i18n="skills.cat3">Cryptographie</div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name">PKI, TLS, VPN, Certificats</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.82"></div></div></div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name"><span data-i18n="skills.pqc">Cryptographie Post-Quantique (PQC)</span></span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.75"></div></div></div>
+        </div>
+
+        <div class="skill-category reveal">
+            <div class="skill-cat-title" data-i18n="skills.cat4">Développement</div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name">Python</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.85"></div></div></div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name">Java</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.75"></div></div></div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name" data-i18n="skills.db">SQL & Bases de données</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.80"></div></div></div>
+            <div class="skill-item"><div class="skill-info"><span class="skill-name">Scripting Bash / PowerShell</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="0.72"></div></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-category reveal">
+          <div class="skill-cat-title" data-i18n="skills.cat5">Outils & Plateformes</div>
+          <div class="tool-badges">
+            <div class="tool-badge">🗺️ Nmap</div>
+            <div class="tool-badge">🌐 Wireshark</div>
+            <div class="tool-badge">💀 Metasploit</div>
+            <div class="tool-badge">📡 Packet Tracer</div>
+            <div class="tool-badge">🐋 Docker</div>
+            <div class="tool-badge">🗄️ SQL Servers</div>
+            <div class="tool-badge">🔒 OpenSSL</div>
+            <div class="tool-badge">🐧 Linux Admin</div>
+            <div class="tool-badge">🪟 Windows Server</div>
+            <div class="tool-badge"><span class="ico">☁️</span> AWS Security</div>
+            <div class="tool-badge"><span class="ico">🪟</span> Azure AD</div>
+            <div class="tool-badge"><span class="ico">📁</span> Git</div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal" style="margin-top: 2.5rem;">
+          <div class="skill-cat-title" data-i18n="skills.cat6">Référentiels & Normes</div>
+          <div class="tool-badges">
+            <div class="tool-badge">ISO 27001</div>
+            <div class="tool-badge">ISO 27005</div>
+            <div class="tool-badge">ISO 27002</div>
+            <div class="tool-badge">EBIOS RM</div>
+            <div class="tool-badge">NIST CSF</div>
+            <div class="tool-badge">MITRE ATT&CK</div>
+            <div class="tool-badge">RGPD</div>
+            <div class="tool-badge">NIS2</div>
+            <div class="tool-badge">DORA</div>
+            <div class="tool-badge">ANSSI</div>
+            <div class="tool-badge">PCI-DSS</div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top: 2.5rem;">
+          <div class="skill-cat-title">Security Dashboard</div>
+          <div style="background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; font-family: 'Space Mono', monospace; font-size: 0.72rem;">
+            <div style="color: var(--text3); margin-bottom: 1rem; letter-spacing: 1px;">// COMPETENCY MATRIX - MADIANE SAHLI</div>
+            <div class="sd-grid">
+              <div class="sd-row">
+                <span class="sd-label">Gouvernance SSI</span>
+                <div class="sd-bars">
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent); opacity: 0.4;"></div>
+                </div>
+                <span class="sd-score" style="color: var(--accent);">4/5</span>
+              </div>
+              <div class="sd-row">
+                <span class="sd-label">ISO 27001 Audit</span>
+                <div class="sd-bars">
+                  <div style="width: 18px; height: 8px; background: var(--accent3);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent3);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent3);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent3);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent3);"></div>
+                </div>
+                <span class="sd-score" style="color: var(--accent3);">5/5</span>
+              </div>
+              <div class="sd-row">
+                <span class="sd-label">Risk Management</span>
+                <div class="sd-bars">
+                  <div style="width: 18px; height: 8px; background: var(--accent2);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent2);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent2);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent2);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent2); opacity: 0.3;"></div>
+                </div>
+                <span class="sd-score" style="color: var(--accent2);">4/5</span>
+              </div>
+              <div class="sd-row">
+                <span class="sd-label">Crypto / PQC</span>
+                <div class="sd-bars">
+                  <div style="width: 18px; height: 8px; background: var(--warn);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--warn);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--warn);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--warn); opacity: 0.4;"></div>
+                  <div style="width: 18px; height: 8px; background: var(--warn); opacity: 0.2;"></div>
+                </div>
+                <span class="sd-score" style="color: var(--warn);">3/5</span>
+              </div>
+              <div class="sd-row">
+                <span class="sd-label" data-i18n="skills.netsec">Sécurité réseau</span>
+                <div class="sd-bars">
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent);"></div>
+                  <div style="width: 18px; height: 8px; background: var(--accent); opacity: 0.3;"></div>
+                </div>
+                <span class="sd-score" style="color: var(--accent);">4/5</span>
+              </div>
+            </div>
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--accent3); display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 6px; height: 6px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite;"></div>
+              <span data-i18n="skills.profile">Profil : Expert Junior Confirmé</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label" data-i18n="nav.certifications">Certifications</span>
+      <h2 class="section-title" data-i18n="certs.title">Accréditations <span>internationales</span></h2>
+      <p style="color: var(--text2); max-width: 600px; margin-top: 1rem;" data-i18n="certs.subtitle">Certifications délivrées par PECB & MasterMind, reconnues internationalement dans le domaine de la sécurité de l'information.</p>
+    </div>
+    <div class="certs-grid" style="margin-top: 3.5rem;">
+
+      <div class="cert-card reveal">
+        <span class="cert-icon">🏆</span>
+        <span class="cert-badge-label">PECB Certified</span>
+        <div class="cert-name">ISO/IEC 27001<br>Lead Implementer</div>
+        <div class="cert-body">Information Security Management System</div>
+        <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.6; margin-bottom: 1.5rem;" data-i18n="certs.c1.desc">
+          Compétence avancée en conception, mise en œuvre et gestion d'un SMSI conforme à l'ISO 27001. Capacité à piloter l'ensemble du cycle de certification.
+        </p>
+        <a href="https://www.credly.com/badges/2cbeee07-7a9f-4da3-9ead-a2c45f6bf6af/public_url" target="_blank" class="cert-verified">✓ <span data-i18n="certs.verify">Vérifier sur Credly</span></a>
+      </div>
+
+      <div class="cert-card reveal">
+        <span class="cert-icon">🔍</span>
+        <span class="cert-badge-label">PECB Certified</span>
+        <div class="cert-name">ISO/IEC 27001<br>Lead Auditor</div>
+        <div class="cert-body">Information Security Audit</div>
+        <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.6; margin-bottom: 1.5rem;" data-i18n="certs.c2.desc">
+          Expertise en conduite d'audits de certification ISO 27001. Maîtrise des techniques d'audit, évaluation des contrôles et rédaction de rapports d'audit.
+        </p>
+        <a href="https://www.credly.com/badges/cd45f558-ebea-4871-a612-062d893d4ca3/public_url" target="_blank" class="cert-verified">✓ <span data-i18n="certs.verify">Vérifier sur Credly</span></a>
+      </div>
+
+      <div class="cert-card reveal">
+        <span class="cert-icon">⚠️</span>
+        <span class="cert-badge-label">PECB Certified</span>
+        <div class="cert-name">ISO/IEC 27005<br>Risk Manager</div>
+        <div class="cert-body">Information Security Risk Management</div>
+        <p style="font-size: 0.82rem; color: var(--text2); line-height: 1.6; margin-bottom: 1.5rem;" data-i18n="certs.c3.desc">
+          Expertise en gestion des risques liés à la sécurité de l'information. Maîtrise d'EBIOS RM, appréciation, traitement et communication sur les risques.
+        </p>
+        <span class="cert-pending">⏳ <span data-i18n="certs.pending">En cours d'obtention</span></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label" data-i18n="nav.projects">Projets</span>
+      <h2 class="section-title" data-i18n="projects.title">Réalisations <span>concrètes</span></h2>
+      <p style="color: var(--text2); max-width: 600px; margin-top: 1rem;" data-i18n="projects.subtitle">Projets réalisés en contexte professionnel et académique, illustrant la profondeur et la diversité de mon expertise en cybersécurité.</p>
+    </div>
+    <div class="projects-grid" style="margin-top: 3.5rem;">
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">01</div>
+          <span class="project-icon">🔐</span>
+          <div class="project-title"><span data-i18n="projects.p1.title">Projet PQC - Transition Post-Quantique</span></div>
+          <div class="project-type" data-i18n="projects.p1.type">PQC · Cryptographie · Stratégie</div>
+          <span class="project-status status-ongoing"><span data-i18n="projects.status.ongoing">En cours</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p1.desc">Pilotage d'un projet pionnier à la Mairie de Châlons-en-Champagne visant à préparer le SI à la menace des calculateurs quantiques - inventaire complet des mécanismes cryptographiques (PKI, TLS, VPN, certificats), identification des dépendances et élaboration d'une feuille de route de migration.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key">Context</span><span class="meta-val">Mairie de Châlons-en-Champagne - DSI</span></div>
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.algo">Algo cibles</span></span><span class="meta-val">CRYSTALS-Kyber, Dilithium, SPHINCS+</span></div>
+            <div class="meta-row"><span class="meta-key" data-i18n="projects.meta.deliverables">Livrables</span><span class="meta-val" data-i18n="projects.p1.deliv">Inventaire crypto, cartographie, roadmap</span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag">PQC</span><span class="p-tag">PKI</span><span class="p-tag">TLS</span><span class="p-tag">NIST</span><span class="p-tag">Crypto-agility</span></div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">02</div>
+          <span class="project-icon">🗺️</span>
+          <div class="project-title"><span data-i18n="projects.p2.title">Cartographie du Système d'Information</span></div>
+          <div class="project-type" data-i18n="projects.p2.type">GRC · Gouvernance · Risques</div>
+          <span class="project-status status-complete"><span data-i18n="projects.status.complete">Terminé</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p2.desc">Cartographie complète du SI de la Mairie - identification et documentation des composants matériels, logiciels, flux de données et dépendances. Support direct à la gestion des risques ISO 27005 et à la sécurité des projets IT interservices.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.scope">Périmètre</span></span><span class="meta-val" data-i18n="projects.p2.scope">SI complet de la collectivité</span></div>
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.method">Méthode</span></span><span class="meta-val">ISO 27001 / ISO 27005</span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag">ISO 27001</span><span class="p-tag">ISO 27005</span><span class="p-tag">Cartographie</span><span class="p-tag">Risk Register</span></div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">03</div>
+          <span class="project-icon">📋</span>
+          <div class="project-title"><span data-i18n="projects.p3.title">Politiques & Procédures de Sécurité</span></div>
+          <div class="project-type" data-i18n="projects.p3.type">Gouvernance · Conformité</div>
+          <span class="project-status status-complete"><span data-i18n="projects.status.complete">Terminé</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p3.desc">Élaboration et mise en œuvre de politiques et procédures de sécurité couvrant la protection des systèmes, la gestion des données, les contrôles d'accès et la réponse aux incidents, conformément aux exigences ISO 27001 et aux directives ANSSI.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.standard">Référentiel</span></span><span class="meta-val">ISO 27001:2022 + ANSSI</span></div>
+            <div class="meta-row"><span class="meta-key" data-i18n="projects.meta.deliverables">Livrables</span><span class="meta-val" data-i18n="projects.p3.deliv">PSSI, procédures, guides utilisateurs</span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag">PSSI</span><span class="p-tag">ISO 27001</span><span class="p-tag">ANSSI</span><span class="p-tag"><span data-i18n="projects.p3.tag1">Contrôle d'accès</span></span></div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">04</div>
+          <span class="project-icon">🚨</span>
+          <div class="project-title"><span data-i18n="projects.p4.title">Gestion des Incidents de Sécurité</span></div>
+          <div class="project-type" data-i18n="projects.p4.type">SOC · Surveillance · Réponse</div>
+          <span class="project-status status-ongoing"><span data-i18n="projects.status.ongoing">En cours</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p4.desc">Mise en place et opération d'un processus de surveillance et gestion des incidents de sécurité - détection, qualification, réponse et traçabilité des incidents pour minimiser leur impact sur le SI de la collectivité.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key">Outils</span><span class="meta-val" data-i18n="projects.p4.tools">Nmap, Wireshark, journaux système</span></div>
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.flow">Flux</span></span><span class="meta-val"><span data-i18n="projects.p4.flow">Détection → Triage → Réponse → RETEX</span></span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag">Incident Response</span><span class="p-tag">Monitoring</span><span class="p-tag">Wireshark</span><span class="p-tag">Nmap</span></div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">05</div>
+          <span class="project-icon">🎓</span>
+          <div class="project-title"><span data-i18n="projects.p5.title">Programme de Sensibilisation Cybersécurité</span></div>
+          <div class="project-type" data-i18n="projects.p5.type">Formation · Gouvernance humaine</div>
+          <span class="project-status status-complete"><span data-i18n="projects.status.complete">Terminé</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p5.desc">Conception et déploiement d'un programme de sensibilisation à la cybersécurité pour les agents de la Mairie - bonnes pratiques, hameçonnage, gestion des mots de passe, comportement sécurisé sur les systèmes d'information.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.audience">Public</span></span><span class="meta-val" data-i18n="projects.p5.audience">Agents de la collectivité</span></div>
+            <div class="meta-row"><span class="meta-key" data-i18n="projects.meta.deliverables">Livrables</span><span class="meta-val" data-i18n="projects.p5.deliv">Supports formation, tests phishing</span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag"><span data-i18n="projects.p5.tag1">Sensibilisation</span></span><span class="p-tag">Phishing</span><span class="p-tag"><span data-i18n="projects.p5.tag2">Formation</span></span><span class="p-tag">ISO 27001</span></div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-number">06</div>
+          <span class="project-icon">🌐</span>
+          <div class="project-title"><span data-i18n="projects.p6.title">Projets Réseaux & Sécurité - Master 2</span></div>
+          <div class="project-type" data-i18n="projects.p6.type">Master 2 URCA · Académique</div>
+          <span class="project-status status-ongoing"><span data-i18n="projects.status.ongoing">En cours</span></span>
+        </div>
+        <div class="project-body">
+          <p class="project-desc" data-i18n="projects.p6.desc">Projets académiques en Master 2 Réseaux & Télécommunications - configuration avancée de pare-feux, architectures VPN, segmentation réseau, IDS/IPS, sécurité des protocoles et simulation d'environnements attaque/défense.</p>
+          <div class="project-meta">
+            <div class="meta-row"><span class="meta-key">Outils</span><span class="meta-val">Packet Tracer, Metasploit, Nmap, Wireshark, Docker</span></div>
+            <div class="meta-row"><span class="meta-key"><span data-i18n="projects.meta.topics">Thèmes</span></span><span class="meta-val">VPN, IDS/IPS, Firewall, PKI, TLS, Linux</span></div>
+          </div>
+          <div class="project-tags"><span class="p-tag">VPN</span><span class="p-tag">IDS/IPS</span><span class="p-tag">Firewall</span><span class="p-tag">PKI</span><span class="p-tag">Docker</span><span class="p-tag">Metasploit</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;">
+      <div class="reveal">
+        <span class="section-label" data-i18n="nav.timeline">Parcours</span>
+        <h2 class="section-title" data-i18n="timeline.title">Mon <span>évolution</span></h2>
+        <p style="color: var(--text2); line-height: 1.8; margin-top: 1rem;" data-i18n="timeline.subtitle">Un parcours construit autour d'une passion pour la cybersécurité, de l'analytique au stratégique, de l'implémentation technique à la gouvernance de haut niveau.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date" data-i18n="timeline.t1.date">Août 2024 - Août 2026</div>
+          <span class="timeline-type type-exp"><span data-i18n="timeline.type.exp">Expérience</span></span>
+          <div class="timeline-title"><span data-i18n="exp.job1.role">Assistant RSSI</span></div>
+          <div class="timeline-sub">DSI - Mairie de Châlons-en-Champagne</div>
+          <div class="timeline-desc" data-i18n="timeline.t1.desc">Gouvernance SSI, cartographie SI, politiques sécurité, sensibilisation, gestion des incidents, PQC.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot cert"></div>
+          <div class="timeline-date" data-i18n="timeline.t2.date">En cours</div>
+          <span class="timeline-type type-cert" data-i18n="timeline.type.cert">Certification</span>
+          <div class="timeline-title">ISO/IEC 27005 Risk Manager</div>
+          <div class="timeline-sub">PECB Certified</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot cert"></div>
+          <div class="timeline-date" data-i18n="timeline.t3.date">Janvier 2026</div>
+          <span class="timeline-type type-cert" data-i18n="timeline.type.cert">Certification</span>
+          <div class="timeline-title">ISO/IEC 27001 Lead Auditor</div>
+          <div class="timeline-sub">MasterMind Certified · <a href="https://www.credly.com/badges/cd45f558-ebea-4871-a612-062d893d4ca3/public_url" target="_blank" style="color:var(--accent3);font-family:'Space Mono',monospace;font-size:.7rem">Credly ↗</a></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot cert"></div>
+          <div class="timeline-date" data-i18n="timeline.t4.date">Janvier 2026</div>
+          <span class="timeline-type type-cert" data-i18n="timeline.type.cert">Certification</span>
+          <div class="timeline-title">ISO/IEC 27001 Lead Implementer</div>
+          <div class="timeline-sub">PECB Certified · <a href="https://www.credly.com/badges/2cbeee07-7a9f-4da3-9ead-a2c45f6bf6af/public_url" target="_blank" style="color:var(--accent3);font-family:'Space Mono',monospace;font-size:.7rem">Credly ↗</a></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot edu"></div>
+          <div class="timeline-date" data-i18n="timeline.t5.date">Septembre 2024 - Août 2026</div>
+          <span class="timeline-type type-edu"><span data-i18n="timeline.type.edu">Formation</span></span>
+          <div class="timeline-title"><span data-i18n="timeline.t5.title">Master Réseaux & Télécommunications</span></div>
+          <div class="timeline-sub">Université de Reims Champagne-Ardenne</div>
+          <div class="timeline-desc" data-i18n="timeline.t5.desc">Spécialisation : Administration et sécurité des réseaux</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date" data-i18n="timeline.t6.date">Avril 2024 - Août 2024</div>
+          <span class="timeline-type type-exp"><span data-i18n="timeline.type.exp">Expérience</span></span>
+          <div class="timeline-title"><span data-i18n="exp.job2.role">Analyste Programmeur</span></div>
+          <div class="timeline-sub">DSI - Mairie de Châlons-en-Champagne</div>
+          <div class="timeline-desc" data-i18n="timeline.t6.desc">Maintenance applicative, optimisation, développement REST API.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot edu"></div>
+          <div class="timeline-date">2020 - 2024</div>
+          <span class="timeline-type type-edu"><span data-i18n="timeline.type.edu">Formation</span></span>
+          <div class="timeline-title"><span data-i18n="timeline.t7.title">Licence en Informatique</span></div>
+          <div class="timeline-sub">Université de Reims Champagne-Ardenne</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot edu"></div>
+            <div class="timeline-date">2020</div>
+            <span class="timeline-type type-edu"><span data-i18n="timeline.type.dip">Diplôme</span></span>
+            <div class="timeline-title"><span data-i18n="timeline.t8.title">Baccalauréat ES - Mathématiques</span></div>
+            <div class="timeline-sub">Lycée Jean Talon, Châlons-en-Champagne</div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
+      <span class="section-label" style="justify-content: center;" data-i18n="nav.contact">Contact</span>
+      <h2 class="section-title" data-i18n="contact.title">Travaillons <span>ensemble</span></h2>
+      <p style="color: var(--text2); max-width: 500px; margin: 1rem auto 0;" data-i18n="contact.subtitle">Vous recrutez un ingénieur/consultant cybersécurité, un expert GRC ou un futur RSSI ? Disponible à partir de septembre 2026.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="contact-info">
+          <h3 data-i18n="contact.avail.title">Disponible pour vos opportunités</h3>
+          <p data-i18n="contact.avail.desc">Je suis ouvert aux missions de conseil, aux postes en CDI ou aux collaborations freelance dans les domaines de la cybersécurité, du GRC, de l'audit ISO et de la gouvernance sécurité.</p>
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/madiane-sahli/" target="_blank" class="contact-link">
+              <span class="contact-link-icon">💼</span>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div>linkedin.com/in/madiane-sahli</div>
+              </div>
+            </a>
+            <div class="contact-link" style="cursor: default;">
+              <span class="contact-link-icon">📍</span>
+              <div>
+                <div class="contact-link-label" data-i18n="contact.location.label">Localisation</div>
+                <div data-i18n="contact.location.val">France - Mobilité nationale & internationale</div>
+              </div>
+            </div>
+            <div class="contact-link" style="cursor:default">
+              <span class="contact-link-icon">🎯</span>
+              <div><div class="contact-link-label"><span data-i18n="contact.status.label">Disponibilité</span></div><div><span data-i18n="contact.status.val">Temps plein - Septembre 2026</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvzbqaek" method="POST" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname" data-i18n="form.fname">Prénom</label>
+              <input type="text" id="fname" name="firstname" placeholder="Jean" data-i18n-attr="placeholder:form.ph.name" required>
+            </div>
+            <div class="form-group">
+              <label for="lname" data-i18n="form.lname">Nom</label>
+              <input type="text" id="lname" name="lastname" placeholder="Dupont" data-i18n-attr="placeholder:form.ph.lastname" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="company" data-i18n="form.company">Entreprise</label>
+            <input type="text" id="company" name="company" placeholder="Votre organisation" data-i18n-attr="placeholder:form.ph.company">
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="form.email">Email professionnel</label>
+            <input type="email" id="email" name="email" placeholder="contact@entreprise.fr" data-i18n-attr="placeholder:form.ph.email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject" data-i18n="form.subject">Objet</label>
+            <input type="text" id="subject" name="subject" placeholder="Opportunité / Mission / Collaboration" data-i18n-attr="placeholder:form.ph.subject">
+          </div>
+          <div class="form-group">
+            <label for="message" data-i18n="form.message">Message</label>
+            <textarea id="message" name="message" placeholder="Décrivez votre besoin ou opportunité..." data-i18n-attr="placeholder:form.ph.message" required></textarea>
+          </div>
+          
+          <button type="submit" class="form-submit" id="submitBtn" data-i18n="form.submit">→ Envoyer le message</button>
+          
+          <div class="form-note" data-i18n="form.note">🔒 Vos données sont traitées de manière confidentielle et sécurisée.</div>
+          
+          <div id="formMsg" style="display:none; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent3); padding: 1rem; border: 1px solid rgba(0,255,136,0.2); background: rgba(0,255,136,0.05);">
+            <span data-i18n="form.success">✓ Message envoyé avec succès. Je vous répondrai dans les plus brefs délais.</span>
+          </div>
+          
+          <div id="formError" style="display:none; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--danger); padding: 1rem; border: 1px solid rgba(255, 71, 87, 0.2); background: rgba(255, 71, 87, 0.05);">
+            <span>⚠️ Une erreur est survenue. Merci de réessayer ou de me contacter via LinkedIn.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">MS//SEC</div>
+    <p class="footer-copy">© 2026 <span>Madiane Sahli</span> - <span data-i18n="hero.title">Ingénieur Cybersécurité</span><br>madiane.tech - <span data-i18n="footer.rights">Tous droits réservés.</span></p>
+  </div>
+</footer>
+</div>
+
+<script>
+// ==================== I18N DATA ====================
+const i18n = {
+  fr: {
+    nav: { about: "À propos", experience: "Expérience", skills: "Compétences", certifications: "Certifications", projects: "Projets", timeline: "Parcours", contact: "Contact", cta: "Me contacter" },
+    hero: { status: "Disponible - Poste à temps plein · Sept. 2026", title: "Ingénieur Cybersécurité", bio: "Expert GRC, certifié ISO/IEC 27001 Lead Implementer & Lead Auditor, ISO/IEC 27005 Risk Manager. Assistant RSSI à la Mairie de Châlons-en-Champagne - je sécurise les SI, pilote les risques et prépare les organisations à la menace post-quantique.", btnProjects: "→ Voir mes projets" },
+    stats: { certs: "Certifications ISO", years: "Années d'expérience", projects: "Projets réalisés", engagement: "% Engagement sécurité" },
+    about: { badgeLabel: "Spécialité", title: "Passionné par la <span>sécurité</span> des systèmes d'information", p1: "Étudiant en <strong>Master 2 Réseaux & Télécommunications</strong> (spécialisation Administration et sécurité des réseaux) à l'Université de Reims Champagne-Ardenne, j'exerce simultanément en tant qu'<strong>Assistant RSSI</strong> à la DSI de la Mairie de Châlons-en-Champagne.", quote: "\"La sécurité ne s'improvise pas - elle se construit, se gouverne, et s'adapte continuellement aux menaces émergentes.\"", p2: "Titulaire de trois certifications internationales (ISO 27001 LI, ISO 27001 LA, ISO 27005 RM), je conduis des missions stratégiques : cartographie du SI, gestion des risques, politiques SSI, et je pilote un <strong>projet pionnier de transition vers la cryptographie post-quantique (PQC)</strong> - incluant l'inventaire des mécanismes cryptographiques et l'identification des dépendances.", p3: "Mobilité internationale - disponible à temps plein à partir de <strong>septembre 2026</strong>.", lang1: "🇫🇷 Français <span class='lang-level'>- Natif</span>", lang2: "🇬🇧 Anglais <span class='lang-level'>- B2 Professionnel</span>", lang3: "🇪🇸 Espagnol <span class='lang-level'>- B1</span>" },
+    exp: { title: "Parcours <span>professionnel</span>", job1: { role: "Assistant RSSI", company: "DSI - Mairie de Châlons-en-Champagne, France", date: "Août 2024 - Août 2026", desc: "Mission en alternance au sein de la DSI d'une collectivité territoriale. En appui direct du RSSI, avec responsabilités sur la gouvernance SSI, la gestion des risques et la conformité. Rôle pivot entre équipes techniques, direction et métiers.", t1: "Cartographie du système d'information - identification et documentation des composants, flux et dépendances", t2: "Collaboration sur des projets de sécurité interservices - mise en place de solutions conformes aux exigences organisationnelles", t3: "Rédaction de politiques et procédures de sécurité - protection des systèmes, données et contrôles d'accès", t4: "Formation et sensibilisation à la cybersécurité - éducation des utilisateurs sur les bonnes pratiques", t5: "Surveillance et gestion des incidents de sécurité - détection et réponse pour minimiser l'impact", t6: "<strong>Pilotage du projet de transition vers la cryptographie post-quantique (PQC)</strong> - inventaire des mécanismes cryptographiques et identification des dépendances" }, job2: { role: "Analyste Programmeur", company: "DSI - Mairie de Châlons-en-Champagne, France", date: "Avril 2024 - Août 2024", desc: "Stage de 4 mois au sein de la même DSI. Développement applicatif, maintenance du catalogue d'applications et optimisation des performances en environnement d'administration publique.", t1: "Maintenance corrective et évolutive du catalogue d'applications de la collectivité", t2: "Optimisation des performances des applications métier", t3: "Développement d'APIs REST pour l'interconnexion des services" } },
+    skills: { title: "Arsenal <span>technique</span>", cat1: "Gouvernance & GRC", cat2: "Sécurité Technique", cat3: "Cryptographie", cat4: "Développement", cat5: "Outils & Plateformes", cat6: "Référentiels & Normes", risk: "ISO 27005 - Gestion des risques", audit: "Audit SI & conformité", netsec: "Sécurité réseau & infrastructure", appsec: "Sécurité applicative / OWASP", hardening: "Hardening systèmes (Linux/Windows)", pqc: "Cryptographie Post-Quantique (PQC)", db: "SQL & Bases de données", profile: "Profil : Expert Junior Confirmé" },
+    certs: { title: "Accréditations <span>internationales</span>", subtitle: "Certifications délivrées par PECB & MasterMind, reconnues internationalement dans le domaine de la sécurité de l'information.", c1: { desc: "Compétence avancée en conception, mise en œuvre et gestion d'un SMSI conforme à l'ISO 27001. Capacité à piloter l'ensemble du cycle de certification." }, c2: { desc: "Expertise en conduite d'audits de certification ISO 27001. Maîtrise des techniques d'audit, évaluation des contrôles et rédaction de rapports d'audit." }, c3: { desc: "Expertise en gestion des risques liés à la sécurité de l'information. Maîtrise d'EBIOS RM, appréciation, traitement et communication sur les risques." }, verify: "Vérifier sur Credly", pending: "En cours d'obtention" },
+    projects: { title: "Réalisations <span>concrètes</span>", subtitle: "Projets réalisés en contexte professionnel et académique, illustrant la profondeur et la diversité de mon expertise en cybersécurité.", meta: { scope: "Périmètre", method: "Méthode", standard: "Référentiel", deliverables: "Livrables", tools: "Outils", flow: "Flux", audience: "Public", topics: "Thèmes", algo: "Algo cibles" }, status: { ongoing: "En cours", complete: "Terminé" }, p1: { title: "Projet PQC - Transition Post-Quantique", type: "PQC · Cryptographie · Stratégie", desc: "Pilotage d'un projet pionnier à la Mairie de Châlons-en-Champagne visant à préparer le SI à la menace des calculateurs quantiques - inventaire complet des mécanismes cryptographiques (PKI, TLS, VPN, certificats), identification des dépendances et élaboration d'une feuille de route de migration.", deliv: "Inventaire crypto, cartographie, roadmap" }, p2: { title: "Cartographie du Système d'Information", type: "GRC · Gouvernance · Risques", desc: "Cartographie complète du SI de la Mairie - identification et documentation des composants matériels, logiciels, flux de données et dépendances. Support direct à la gestion des risques ISO 27005 et à la sécurité des projets IT interservices.", scope: "SI complet de la collectivité" }, p3: { title: "Politiques & Procédures de Sécurité", type: "Gouvernance · Conformité", desc: "Élaboration et mise en œuvre de politiques et procédures de sécurité couvrant la protection des systèmes, la gestion des données, les contrôles d'accès et la réponse aux incidents, conformément aux exigences ISO 27001 et aux directives ANSSI.", deliv: "PSSI, procédures, guides utilisateurs", tag1: "Contrôle d'accès" }, p4: { title: "Gestion des Incidents de Sécurité", type: "SOC · Surveillance · Réponse", desc: "Mise en place et opération d'un processus de surveillance et gestion des incidents de sécurité - détection, qualification, réponse et traçabilité des incidents pour minimiser leur impact sur le SI de la collectivité.", tools: "Nmap, Wireshark, journaux système", flow: "Détection → Triage → Réponse → RETEX" }, p5: { title: "Programme de Sensibilisation Cybersécurité", type: "Formation · Gouvernance humaine", desc: "Conception et déploiement d'un programme de sensibilisation à la cybersécurité pour les agents de la Mairie - bonnes pratiques, hameçonnage, gestion des mots de passe, comportement sécurisé sur les systèmes d'information.", audience: "Agents de la collectivité", deliv: "Supports formation, tests phishing", tag1: "Sensibilisation", tag2: "Formation" }, p6: { title: "Projets Réseaux & Sécurité - Master 2", type: "Master 2 URCA · Académique", desc: "Projets académiques en Master 2 Réseaux & Télécommunications - configuration avancée de pare-feux, architectures VPN, segmentation réseau, IDS/IPS, sécurité des protocoles et simulation d'environnements attaque/défense." } },
+    timeline: { title: "Mon <span>évolution</span>", subtitle: "Un parcours construit autour d'une passion pour la cybersécurité, de l'analytique au stratégique, de l'implémentation technique à la gouvernance de haut niveau.", type: { exp: "Expérience", cert: "Certification", edu: "Formation", dip: "Diplôme" }, t1: { date: "Août 2024 - Août 2026", desc: "Gouvernance SSI, cartographie SI, politiques sécurité, sensibilisation, gestion des incidents, PQC." }, t2: { date: "En cours" }, t3: { date: "Janvier 2026" }, t4: { date: "Janvier 2026" }, t5: { date: "Septembre 2024 - Août 2026", title: "Master Réseaux & Télécommunications", desc: "Spécialisation : Administration et sécurité des réseaux" }, t6: { date: "Avril 2024 - Août 2024", desc: "Maintenance applicative, optimisation, développement REST API." }, t7: { title: "Licence en Informatique" }, t8: { title: "Baccalauréat ES - Mathématiques" } },
+    contact: { title: "Travaillons <span>ensemble</span>", subtitle: "Vous recrutez un ingénieur/consultant cybersécurité, un expert GRC ou un futur RSSI ? Disponible à partir de septembre 2026.", avail: { title: "Disponible pour vos opportunités", desc: "Je suis ouvert aux missions de conseil, aux postes en CDI ou aux collaborations freelance dans les domaines de la cybersécurité, du GRC, de l'audit ISO et de la gouvernance sécurité." }, location: { label: "Localisation", val: "France - Mobilité nationale & internationale" }, status: { label: "Disponibilité", val: "Temps plein - Septembre 2026" } },
+    form: { fname: "Prénom", lname: "Nom", company: "Entreprise", email: "Email professionnel", subject: "Objet", message: "Message", submit: "→ Envoyer le message", note: "🔒 Vos données sont traitées de manière confidentielle et sécurisée.", success: "✓ Message envoyé avec succès. Je vous répondrai dans les plus brefs délais.", sending: "⟳ Envoi en cours...", ph: { name: "Jean", lastname: "Dupont", company: "Votre organisation", email: "contact@entreprise.fr", subject: "Opportunité / Mission / Collaboration", message: "Décrivez votre besoin ou opportunité..." } },
+    footer: { rights: "Tous droits réservés." }
+  },
+  en: {
+    nav: { about: "About", experience: "Experience", skills: "Skills", certifications: "Certifications", projects: "Projects", timeline: "Timeline", contact: "Contact", cta: "Contact Me" },
+    hero: { status: "Available - Full Time Position · Sept. 2026", title: "Cybersecurity Engineer", bio: "GRC Expert, ISO/IEC 27001 Lead Implementer & Lead Auditor, ISO/IEC 27005 Risk Manager. Assistant CISO at Mairie de Châlons-en-Champagne - I secure IS, manage risks and prepare organizations for the post-quantum threat.", btnProjects: "→ See my projects" },
+    stats: { certs: "ISO Certifications", years: "Years Experience", projects: "Projects Delivered", engagement: "% Security Engagement" },
+    about: { badgeLabel: "Specialty", title: "Passionate about <span>Information</span> System Security", p1: "Student in <strong>Master 2 Networks & Telecommunications</strong> (specialization Network Administration and Security) at the University of Reims Champagne-Ardenne, I simultaneously work as an <strong>Assistant CISO</strong> at the IT Department of the Mairie de Châlons-en-Champagne.", quote: "\"Security cannot be improvised - it is built, governed, and continually adapted to emerging threats.\"", p2: "Holder of three international certifications (ISO 27001 LI, ISO 27001 LA, ISO 27005 RM), I lead strategic missions: IS mapping, risk management, ISS policies, and I pilot a <strong>pioneering project for transition to post-quantum cryptography (PQC)</strong> - including the inventory of cryptographic mechanisms and identification of dependencies.", p3: "International mobility - available full-time from <strong>September 2026</strong>.", lang1: "🇫🇷 French <span class='lang-level'>- Native</span>", lang2: "🇬🇧 English <span class='lang-level'>- B2 Professional</span>", lang3: "🇪🇸 Spanish <span class='lang-level'>- B1</span>" },
+    exp: { title: "Professional <span>Journey</span>", job1: { role: "Assistant CISO", company: "IT Dept - Mairie de Châlons-en-Champagne, France", date: "Aug 2024 - Aug 2026", desc: "Work-study mission within the IT department of a local authority. Direct support to the CISO, with responsibilities on ISS governance, risk management and compliance. Pivotal role between technical teams, management and business units.", t1: "Information system mapping - identification and documentation of components, flows and dependencies", t2: "Collaboration on inter-service security projects - implementation of solutions compliant with organizational requirements", t3: "Drafting of security policies and procedures - protection of systems, data and access controls", t4: "Cybersecurity training and awareness - educating users on best practices", t5: "Security incident monitoring and management - detection and response to minimize impact", t6: "<strong>Piloting the transition project to post-quantum cryptography (PQC)</strong> - inventory of cryptographic mechanisms and identification of dependencies" }, job2: { role: "Programmer Analyst", company: "IT Dept - Mairie de Châlons-en-Champagne, France", date: "April 2024 - Aug 2024", desc: "4-month internship within the same IT department. Application development, maintenance of the application catalog and performance optimization in a public administration environment.", t1: "Corrective and evolutionary maintenance of the community's application catalog", t2: "Optimization of business application performance", t3: "Development of REST APIs for service interconnection" } },
+    skills: { title: "Technical <span>Arsenal</span>", cat1: "Governance & GRC", cat2: "Technical Security", cat3: "Cryptography", cat4: "Development", cat5: "Tools & Platforms", cat6: "Standards & Norms", risk: "ISO 27005 - Risk Management", audit: "IS Audit & Compliance", netsec: "Network & Infrastructure Security", appsec: "App Security / OWASP", hardening: "System Hardening (Linux/Windows)", pqc: "Post-Quantum Cryptography (PQC)", db: "SQL & Databases", profile: "Profile: Confirmed Junior Expert" },
+    certs: { title: "International <span>Accreditations</span>", subtitle: "Certifications issued by PECB & MasterMind, internationally recognized in the field of information security.", c1: { desc: "Advanced competence in designing, implementing and managing an ISMS compliant with ISO 27001. Ability to lead the entire certification cycle." }, c2: { desc: "Expertise in conducting ISO 27001 certification audits. Mastery of audit techniques, control evaluation and audit report writing." }, c3: { desc: "Expertise in information security risk management. Mastery of EBIOS RM, risk assessment, treatment and communication." }, verify: "Verify on Credly", pending: "In progress" },
+    projects: { title: "Concrete <span>Achievements</span>", subtitle: "Projects carried out in professional and academic contexts, illustrating the depth and diversity of my cybersecurity expertise.", meta: { scope: "Scope", method: "Method", standard: "Standard", deliverables: "Deliverables", tools: "Tools", flow: "Flow", audience: "Audience", topics: "Topics", algo: "Target Algos" }, status: { ongoing: "Ongoing", complete: "Completed" }, p1: { title: "PQC Project - Post-Quantum Transition", type: "PQC · Cryptography · Strategy", desc: "Leading a pioneering project at the Mairie de Châlons-en-Champagne aiming to prepare the IS for the threat of quantum computers - complete inventory of cryptographic mechanisms (PKI, TLS, VPN, certificates), identification of dependencies and development of a migration roadmap.", deliv: "Crypto inventory, mapping, roadmap" }, p2: { title: "Information System Mapping", type: "GRC · Governance · Risks", desc: "Complete mapping of the Mairie's IS - identification and documentation of hardware, software, data flows and dependencies. Direct support for ISO 27005 risk management and inter-service IT project security.", scope: "Complete IS scope" }, p3: { title: "Security Policies & Procedures", type: "Governance · Compliance", desc: "Development and implementation of security policies and procedures covering system protection, data management, access controls and incident response, in accordance with ISO 27001 requirements and ANSSI guidelines.", deliv: "ISSP, procedures, user guides", tag1: "Access Control" }, p4: { title: "Security Incident Management", type: "SOC · Monitoring · Response", desc: "Implementation and operation of a security incident monitoring and management process - detection, qualification, response and traceability of incidents to minimize their impact on the community's IS.", tools: "Nmap, Wireshark, system logs", flow: "Detection → Triage → Response → RETEX" }, p5: { title: "Cybersecurity Awareness Program", type: "Training · Human Governance", desc: "Design and deployment of a cybersecurity awareness program for Mairie agents - best practices, phishing, password management, secure behavior on information systems.", audience: "Community Agents", deliv: "Training materials, phishing tests", tag1: "Awareness", tag2: "Training" }, p6: { title: "Network & Security Projects - Master 2", type: "Master 2 URCA · Academic", desc: "Academic projects in Master 2 Networks & Telecommunications - advanced firewall configuration, VPN architectures, network segmentation, IDS/IPS, protocol security and attack/defense environment simulation." } },
+    timeline: { title: "My <span>Evolution</span>", subtitle: "A path built around a passion for cybersecurity, from analytical to strategic, from technical implementation to high-level governance.", type: { exp: "Experience", cert: "Certification", edu: "Education", dip: "Diploma" }, t1: { date: "Aug 2024 - Aug 2026", desc: "ISS Governance, IS mapping, security policies, awareness, incident management, PQC." }, t2: { date: "In Progress" }, t3: { date: "January 2026" }, t4: { date: "January 2026" }, t5: { date: "Sept 2024 - Aug 2026", title: "Master Networks & Telecommunications", desc: "Specialization: Network Administration and Security" }, t6: { date: "April 2024 - Aug 2024", desc: "App maintenance, optimization, REST API development." }, t7: { title: "Bachelor in Computer Science" }, t8: { title: "High School Diploma - Math" } },
+    contact: { title: "Let's Work <span>Together</span>", subtitle: "Hiring a cybersecurity engineer/consultant, GRC expert or future CISO? Available starting September 2026.", avail: { title: "Available for Opportunities", desc: "I am open to consulting missions, permanent positions or freelance collaborations in the fields of cybersecurity, GRC, ISO audit and security governance." }, location: { label: "Location", val: "France - National & International Mobility" }, status: { label: "Availability", val: "Full Time - September 2026" } },
+    form: { fname: "First Name", lname: "Last Name", company: "Company", email: "Work Email", subject: "Subject", message: "Message", submit: "→ Send Message", note: "🔒 Your data is processed confidentially and securely.", success: "✓ Message sent successfully. I will get back to you shortly.", sending: "⟳ Sending...", ph: { name: "John", lastname: "Doe", company: "Your Organization", email: "contact@company.com", subject: "Opportunity / Mission / Collaboration", message: "Describe your need or opportunity..." } },
+    footer: { rights: "All rights reserved." }
+  }
+};
+
+const terminalData = {
+  fr: [
+    { type: 'cmd', prompt: '~/security $', text: 'whoami' },
+    { type: 'out', text: 'madiane.sahli - Responsable Sécurité des SI' },
+    { type: 'cmd', prompt: '~/security $', text: 'cat certifications.txt' },
+    { type: 'out', text: '> [PECB]       ISO/IEC 27001 Lead Implementer ✓', cls: 'green' },
+    { type: 'out', text: '> [MasterMind] ISO/IEC 27001 Lead Auditor     ✓', cls: 'green' },
+    { type: 'out', text: '> [PECB]       ISO/IEC 27005 Risk Manager     ⏳', cls: 'green' },
+    { type: 'cmd', prompt: '~/security $', text: 'status --live' },
+    { type: 'out', text: '[ROLE]  Assistant RSSI @ Mairie Châlons', cls: 'accent' },
+    { type: 'out', text: '[STUDY] Master 2 Réseaux & Sécu - URCA', cls: 'accent' },
+    { type: 'out', text: '[PQC]   Post-Quantum Transition: ACTIVE', cls: 'warn' },
+    { type: 'out', text: '[AVAIL] Temps plein dès Septembre 2026', cls: 'green' },
+    { type: 'cmd', prompt: '~/security $', text: '_', cursor: true }
+  ],
+  en: [
+    { type: 'cmd', prompt: '~/security $', text: 'whoami' },
+    { type: 'out', text: 'madiane.sahli - InfoSec Officer' },
+    { type: 'cmd', prompt: '~/security $', text: 'cat certifications.txt' },
+    { type: 'out', text: '> [PECB]       ISO/IEC 27001 Lead Implementer ✓', cls: 'green' },
+    { type: 'out', text: '> [MasterMind] ISO/IEC 27001 Lead Auditor     ✓', cls: 'green' },
+    { type: 'out', text: '> [PECB]       ISO/IEC 27005 Risk Manager     ⏳', cls: 'green' },
+    { type: 'cmd', prompt: '~/security $', text: 'status --live' },
+    { type: 'out', text: '[ROLE]  Assistant CISO @ Mairie Châlons', cls: 'accent' },
+    { type: 'out', text: '[STUDY] Master 2 Networks & Sec - URCA', cls: 'accent' },
+    { type: 'out', text: '[PQC]   Post-Quantum Transition: ACTIVE', cls: 'warn' },
+    { type: 'out', text: '[AVAIL] Full-time from September 2026', cls: 'green' },
+    { type: 'cmd', prompt: '~/security $', text: '_', cursor: true }
+  ]
+};
+
+// ==================== CURSOR ====================
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+document.querySelectorAll('a, button, .exp-card, .project-card, .cert-card, .tool-badge, .tag, .nav-lang-toggle').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('active'); ring.classList.add('active'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('active'); ring.classList.remove('active'); });
+});
+
+// ==================== NAV ====================
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+// Enhanced Mobile Menu Logic
+function toggleMenu() {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    document.body.style.overflow = isOpen ? 'hidden' : ''; // Scroll Lock
+}
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+});
+
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+// Close on click outside
+document.addEventListener('click', (e) => {
+    if(navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        toggleMenu();
+    }
+});
+
+// Close on ESC
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && navLinks.classList.contains('open')) toggleMenu();
+});
+
+// ==================== TERMINAL ENGINE ====================
+const tb = document.getElementById('terminalBody');
+let terminalId = 0; // To prevent overlapping animations
+
+async function typeTerminal(lang) {
+  terminalId++;
+  const currentId = terminalId;
+  const lines = terminalData[lang] || terminalData['fr'];
+  
+  tb.innerHTML = ''; // Clear
+  
+  for (const line of lines) {
+    if (terminalId !== currentId) return; // Stop if lang changed
+    
+    const div = document.createElement('div');
+    div.className = 't-line';
+    if (line.type === 'cmd') {
+      div.innerHTML = `<span class="t-prompt">${line.prompt}</span><span class="t-cmd"></span>`;
+      tb.appendChild(div);
+      const cmd = div.querySelector('.t-cmd');
+      for (const ch of line.text) {
+        if (terminalId !== currentId) return;
+        if (line.cursor) { cmd.innerHTML = '<span class="t-cursor"></span>'; break; }
+        cmd.textContent += ch;
+        await delay(50 + Math.random() * 30);
+      }
+    } else {
+      div.innerHTML = `<span class="t-out ${line.cls || ''}">${line.text}</span>`;
+      tb.appendChild(div);
+    }
+    await delay(200);
+    tb.scrollTop = tb.scrollHeight;
+  }
+}
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ==================== I18N LOGIC & ANIMATION ====================
+let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('fr') ? 'fr' : 'en');
+const langToggle = document.getElementById('langToggle');
+const bootScreen = document.getElementById('bootScreen');
+const bootLog = document.getElementById('bootLog');
+const bootBar = document.getElementById('bootBar');
+
+function setLanguage(lang) {
+  // Update State
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  
+  // Update Meta
+  document.title = lang === 'fr' ? "Madiane Sahli - Ingénieur Cybersécurité" : "Madiane Sahli - Cybersecurity Engineer";
+  document.querySelector('meta[name="description"]').content = i18n[lang].hero.bio.replace(/<[^>]*>?/gm, '');
+
+  // Update DOM Text
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const keys = key.split('.');
+    let val = i18n[lang];
+    keys.forEach(k => val = val[k]);
+    if (val) el.innerHTML = val;
+  });
+
+  // Update Attributes (placeholder, title, aria)
+  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    const raw = el.getAttribute('data-i18n-attr');
+    const [attr, key] = raw.split(':');
+    const keys = key.split('.');
+    let val = i18n[lang];
+    keys.forEach(k => val = val[k]);
+    if (val) el.setAttribute(attr, val);
+  });
+
+  // Special: Hero Name Glitch
+  const glitch = document.querySelector('.glitch');
+  /* Note: Name is same in both langs, but if it changed, we'd update data-text here */
+
+  // Special: Terminal Reset
+  typeTerminal(lang);
+
+  // Update Toggle UI
+  document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.lang === lang);
+  });
+}
+
+async function playTransition(targetLang) {
+  // Lock interactions
+  document.body.style.overflow = 'hidden';
+  langToggle.style.pointerEvents = 'none';
+
+  // 1. CRT SHUTDOWN
+  const wrapper = document.getElementById('main-wrapper');
+  wrapper.classList.add('crt-shutdown');
+  
+  await delay(500); // Wait for shutdown anim
+  
+  // 2. SHOW BOOT SCREEN (In the dark)
+  bootScreen.style.opacity = '1';
+  // Wrapper is already hidden by crt-shutdown forwards
+  
+  // 3. FAKE BOOT LOGS
+  const logs = targetLang === 'fr' 
+    ? ['> ARRET DU NOYAU [EN]...', '> CHARGEMENT MODULES [FR]...', '> VERIFICATION INTEGRITE...', '> REDEMARRAGE SYSTEME...']
+    : ['> STOPPING KERNEL [FR]...', '> LOADING MODULES [EN]...', '> INTEGRITY CHECK...', '> SYSTEM REBOOT...'];
+    
+  bootBar.style.width = '0%';
+  bootLog.innerHTML = '';
+  
+  for(let i=0; i<logs.length; i++) {
+    bootLog.innerHTML += `<div>${logs[i]}</div>`;
+    bootBar.style.width = `${(i+1) * 25}%`;
+    await delay(150);
+  }
+  
+  await delay(200);
+
+  // 4. SWITCH CONTENT HIDDEN
+  setLanguage(targetLang);
+  
+  // 5. CRT TURN ON
+  bootScreen.style.opacity = '0';
+  wrapper.classList.remove('crt-shutdown');
+  wrapper.classList.add('crt-boot');
+  
+  // 6. CLEANUP
+  setTimeout(() => {
+    wrapper.classList.remove('crt-boot');
+    document.body.style.overflow = '';
+    langToggle.style.pointerEvents = '';
+  }, 650);
+}
+
+langToggle.addEventListener('click', (e) => {
+    if (e.target.classList.contains('lang-opt')) {
+        const target = e.target.dataset.lang;
+        if (target !== currentLang) {
+            playTransition(target);
+        }
+    } else {
+        // Toggle behavior if clicking the container
+        const target = currentLang === 'fr' ? 'en' : 'fr';
+        playTransition(target);
+    }
+});
+
+langToggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const target = currentLang === 'fr' ? 'en' : 'fr';
+        playTransition(target);
+    }
+});
+
+// Initialize Language on Load
+setLanguage(currentLang);
+
+
+// ==================== STATS COUNTER ====================
+function animateCounter(el, target) {
+  let start = 0;
+  const duration = 1500;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target) + (target === 100 ? '%' : '+');
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + (target === 100 ? '%' : '+');
+  };
+  requestAnimationFrame(step);
+}
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.stat-num').forEach(el => animateCounter(el, parseInt(el.dataset.target)));
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) statsObserver.observe(statsBar);
+
+// ==================== SCROLL REVEAL ====================
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left, .timeline-item').forEach(el => revealObserver.observe(el));
+
+// ==================== SKILL BARS ====================
+const skillObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        setTimeout(() => {
+          bar.style.transform = `scaleX(${bar.dataset.width})`;
+          bar.classList.add('animated');
+        }, 200);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-category').forEach(el => skillObserver.observe(el));
+
+// ==================== FORM ====================
+async function handleSubmit(e) {
+  e.preventDefault();
+  
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const msgSuccess = document.getElementById('formMsg');
+  const msgError = document.getElementById('formError'); // Assure-toi d'avoir ajouté la div d'erreur dans le HTML ci-dessus
+  
+  // 1. UI Feedback (Loading)
+  // On sauvegarde le texte original si besoin, mais ici on met le texte "Envoi..."
+  const originalBtnText = btn.textContent;
+  btn.textContent = i18n[currentLang].form.sending || "⟳ Envoi en cours..."; 
+  btn.disabled = true;
+  
+  // Cacher les anciens messages
+  msgSuccess.style.display = 'none';
+  if(msgError) msgError.style.display = 'none';
+
+  // 2. Préparation des données
+  const data = new FormData(form);
+
+  try {
+    // 3. Envoi à Formspree
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    // 4. Traitement de la réponse
+    if (response.ok) {
+      // SUCCÈS
+      form.reset(); // Vide les champs
+      // On cache le formulaire ou juste le bouton, selon ta préférence.
+      // Ici je reprends ta logique : on cache tout le formulaire sauf le message.
+      Array.from(form.children).forEach(child => {
+         // On cache tout sauf le message de succès
+         if (child.id !== 'formMsg') child.style.display = 'none';
+      });
+      
+      msgSuccess.style.display = 'block';
+      
+    } else {
+      // ERREUR FORMSPREE
+      const errorData = await response.json();
+      console.error('Erreur Formspree:', errorData);
+      if(msgError) msgError.style.display = 'block';
+      btn.textContent = originalBtnText; // Remet le texte original
+      btn.disabled = false;
+    }
+  } catch (error) {
+    // ERREUR RÉSEAU
+    console.error('Erreur réseau:', error);
+    if(msgError) msgError.style.display = 'block';
+    btn.textContent = originalBtnText;
+    btn.disabled = false;
+  }
+}
+
+// ==================== ACTIVE NAV LINK ====================
+const sections = document.querySelectorAll('section[id], #hero');
+const navLinkEls = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+  navLinkEls.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+  });
+});
+</script>
+</body>
+</html>
