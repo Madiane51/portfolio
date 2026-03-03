@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensibilisation Cybersécurité - Madiane SAHLI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L90 20 V50 C90 75 50 95 50 95 C50 95 10 75 10 50 V20 Z' fill='%23050810' stroke='%2300d4ff' stroke-width='5'/><text x='50' y='60' fill='%2300d4ff' font-family='sans-serif' font-size='40' text-anchor='middle'>✔</text></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyan: {
+                            400: '#00d4ff', // Portfolio Accent
+                            500: '#00b8e6',
+                            600: '#009cc2',
+                        },
+                        slate: {
+                            900: '#050810', // Portfolio BG
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050810;
+            cursor: none;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(34, 211, 238, 0.2);
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #22d3ee, #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+            width: 2px;
+            background: #1e293b;
+            z-index: -1;
+        }
+
+        /* CUSTOM CURSOR */
+        .cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: #00d4ff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s, background 0.2s;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.12s ease;
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: #00ff88;
+        }
+
+        .cursor-ring.active {
+            width: 50px;
+            height: 50px;
+            border-color: #00ff88;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+
+            .cursor,
+            .cursor-ring {
+                display: none !important;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* LANG TOGGLE CSS */
+        .nav-lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            /* slate-400 */
+            transition: transform 0.1s;
+        }
+
+        .nav-lang-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .lang-opt {
+            position: relative;
+            padding: 0.2rem 0;
+            transition: color 0.3s;
+        }
+
+        .lang-opt.active {
+            color: #22d3ee;
+            /* cyan-400 */
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+            font-weight: 700;
+        }
+
+        .lang-sep {
+            color: #334155;
+            /* slate-700 */
+        }
+    </style>
+</head>
+
+<body class="text-slate-300 min-h-screen flex flex-col items-center pt-6 px-4 pb-12">
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav class="w-full max-w-5xl flex justify-between items-center mb-12">
+        <div class="flex items-center gap-3">
+            <div
+                class="h-8 w-8 bg-cyan-600 rounded flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-900/50">
+                S</div>
+            <a href="index.html" class="font-bold text-white hover:text-cyan-400 transition-colors">Sensibilisation
+                <span class="text-cyan-500">MS//SEC</span></a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="nav-lang-toggle" id="langToggle" tabindex="0" role="button" aria-label="Change Language">
+                <span class="lang-opt active" data-lang="fr">FR</span>
+                <span class="lang-sep">|</span>
+                <span class="lang-opt" data-lang="en">EN</span>
+            </div>
+            <a href="index.html"
+                class="group flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors border border-slate-800 rounded-full px-4 py-2 hover:bg-slate-800">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+                <span data-i18n="nav.back">Retour au Portfolio</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-4xl">
+
+        <!-- A. Hero Section -->
+        <header class="text-center mb-16 fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" data-i18n="hero.title">Programme de <span
+                    class="gradient-text">Sensibilisation</span> Cybersécurité</h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8" data-i18n="hero.desc">
+                Transformer les règles de sécurité en réflexes quotidiens. Une approche alliant pédagogie, cas pratiques
+                et culture de la sécurité pour les agents et les métiers de la collectivité.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#trame"
+                    class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors"
+                    data-i18n="hero.btnOutline">
+                    Voir la trame d'une session
+                </a>
+                <a href="mailto:madiane.sahli@hotmail.com"
+                    class="border border-slate-700 hover:border-cyan-500 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                    data-i18n="hero.btnContact">
+                    Me contacter
+                </a>
+            </div>
+        </header>
+
+        <!-- B. Contexte & objectifs -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-cyan-500 font-mono text-xl font-bold">01.</span>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s1.title">Pourquoi Sensibiliser ? Les 4 Piliers
+                    CIAA</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass p-6 rounded-xl border-t-4 border-cyan-500">
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="s1.c1.title">Confidentialité</h3>
+                    <p class="text-sm text-slate-400" data-i18n="s1.c1.desc">Garantir que seules les personnes
+                        autorisées accèdent aux données.
+                    </p>
+                    <p class="text-xs text-cyan-400 mt-2" data-i18n="s1.c1.ex">→ Au quotidien : "Je verrouille mon poste
+                        dès que je
+                        m'absente."</p>
+                </div>
+                <div class="glass p-6 rounded-xl border-t-4 border-emerald-500">
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="s1.c2.title">Intégrité</h3>
+                    <p class="text-sm text-slate-400" data-i18n="s1.c2.desc">Assurer que les informations n'ont pas été
+                        altérées ou corrompues.
+                    </p>
+                    <p class="text-xs text-emerald-400 mt-2" data-i18n="s1.c2.ex">→ Au quotidien : "Je vérifie
+                        l'expéditeur avant d'ouvrir
+                        une pièce jointe inattendue."</p>
+                </div>
+                <div class="glass p-6 rounded-xl border-t-4 border-orange-500">
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="s1.c3.title">Disponibilité</h3>
+                    <p class="text-sm text-slate-400" data-i18n="s1.c3.desc">Maintenir l'accès aux services et systèmes
+                        essentiels à
+                        l'organisation.</p>
+                    <p class="text-xs text-orange-400 mt-2" data-i18n="s1.c3.ex">→ Au quotidien : "Je sauvegarde mes
+                        documents critiques sur
+                        les espaces réseau validés."</p>
+                </div>
+                <div class="glass p-6 rounded-xl border-t-4 border-purple-500">
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="s1.c4.title">Auditabilité (Preuve)</h3>
+                    <p class="text-sm text-slate-400" data-i18n="s1.c4.desc">Tracer les actions pour identifier la
+                        source d'un incident.</p>
+                    <p class="text-xs text-purple-400 mt-2" data-i18n="s1.c4.ex">→ Au quotidien : "Je ne partage jamais
+                        mes identifiants
+                        professionnels."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- C. Ma méthode (timeline) -->
+        <section id="trame" class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-emerald-500 font-mono text-xl font-bold">02.</span>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s2.title">Ma Méthodologie d'Intervention</h2>
+            </div>
+            <div class="relative pl-4 timeline-line space-y-8">
+                <div class="relative pl-8 group">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-cyan-500 transition-colors">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-cyan-400">1</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s2.t1.title">Cadrage</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s2.t1.desc">Analyse du public cible,
+                        identification des risques métiers
+                        et intégration des contraintes organisationnelles.</p>
+                </div>
+                <div class="relative pl-8 group">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-emerald-500 transition-colors">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-emerald-400">2</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s2.t2.title">Contenu Sur-Mesure</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s2.t2.desc">Adaptation des messages selon les
+                        directions (Finances, RH,
+                        Accueil, etc.) pour un impact concret.</p>
+                </div>
+                <div class="relative pl-8 group">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-orange-500 transition-colors">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-orange-400">3</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s2.t3.title">Démo & Cas Concrets</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s2.t3.desc">Démonstrations visuelles : analyse
+                        d'un vrai phishing, test
+                        de mots de passe, simulation de poste non verrouillé.</p>
+                </div>
+                <div class="relative pl-8 group">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-purple-500 transition-colors">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-purple-400">4</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s2.t4.title">Atelier / Quiz</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s2.t4.desc">Moments d'échange interactifs
+                        (questions-réponses, quiz
+                        rapides) pour ancrer les connaissances.</p>
+                </div>
+                <div class="relative pl-8 group">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-pink-500 transition-colors">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-pink-400">5</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s2.t5.title">Feedback & Amélioration Continue
+                    </h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s2.t5.desc">Mesure de l'attention, recueil des
+                        retours agents et
+                        itération sur les futurs modules de sensibilisation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- D. Modules (Grille) -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-purple-500 font-mono text-xl font-bold">03.</span>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s3.title">Au Cœur des Sessions</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                            </path>
+                        </svg>
+                        <span data-i18n="s3.c1.title">Risques & Menaces</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c1.desc">Comprendre le malware, ransomware, et
+                        l'ingénierie sociale.
+                    </p>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c1.ex">Ex: "La clé USB
+                        trouvée sur le parking :
+                        pourquoi il ne faut jamais la brancher."</p>
+                </div>
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                        <span data-i18n="s3.c2.title">Sécuriser son poste</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c2.desc">Verrouillage, mises à jour, et
+                        sécurité physique des
+                        équipements.</p>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c2.ex">Ex: "Win + L est
+                        votre meilleur ami à
+                        chaque pause café."</p>
+                </div>
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z">
+                            </path>
+                        </svg>
+                        <span data-i18n="s3.c3.title">Mots de passe robustes</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c3.desc">Techniques de création (phonétique,
+                        1ères lettres) et gestion
+                        de vos secrets.</p>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c3.ex">Ex: "J'aime prendre
+                        un ☕ à 8h!" →
+                        `J'apu☕à8h!`</p>
+                </div>
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        <span data-i18n="s3.c4.title">Déjouer le Phishing</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c4.desc">Repérer les signaux d'alerte :
+                        urgence, URL suspecte,
+                        homoglyphes.</p>
+                    <div class="rounded mb-2 mt-2 bg-slate-800 border border-slate-700 p-2">
+                        <div class="text-[10px] text-slate-400 mb-1" data-i18n="s3.c4.from">De : Service Public
+                            &lt;<span class="text-red-400 font-mono">arneli-vitu@gouv.fr</span>&gt;</div>
+                        <div class="text-[10px] text-slate-300" data-i18n="s3.c4.subject">Objet : Remboursement en
+                            attente</div>
+                    </div>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c4.ex">Ex: "Vérifiez
+                        toujours le nom de domaine
+                        exact, pas juste l'affichage."</p>
+                </div>
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                        <span data-i18n="s3.c5.title">Sécurité en Collectivité</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c5.desc">Comprendre l'environnement : PSSI,
+                        EDR, Sauvegardes et
+                        Signalement DSI.</p>
+                    <div
+                        class="rounded mb-2 mt-2 h-16 bg-slate-800 border border-slate-700 flex items-center justify-around px-2">
+                        <div class="flex flex-col items-center">
+                            <span class="text-lg">💻</span>
+                            <span class="text-[10px] text-red-400 mt-1 line-through" data-i18n="s3.c5.desk">Bureau
+                                (C:)</span>
+                        </div>
+                        <span class="text-slate-500">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-lg">☁️</span>
+                            <span class="text-[10px] text-emerald-400 mt-1" data-i18n="s3.c5.cloud">Disque Réseau</span>
+                        </div>
+                    </div>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c5.ex">Ex: "Ce qui est sur
+                        le bureau (C:) ne
+                        survit pas toujours, utilisez les disques réseaux !"</p>
+                </div>
+                <div class="glass p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <span data-i18n="s3.c6.title">IA & Usages</span>
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-2" data-i18n="s3.c6.desc">Usage raisonné de ChatGPT et autres IA
+                        : protection des
+                        données internes et RGPD.</p>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300" data-i18n="s3.c6.ex">Ex: "Ne
+                        copiez/collez jamais de données
+                        nominatives dans une IA grand public."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- E. Mini-Quiz -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-indigo-500 font-mono text-xl font-bold">04.</span>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s4.title">Quiz Express Interactif</h2>
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-slate-900 rounded-xl border border-slate-800 p-8">
+                <div>
+                    <div
+                        class="rounded overflow-hidden mb-6 h-40 bg-slate-800 flex flex-col items-center justify-center border border-slate-700 shadow-inner relative">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-10">
+                            <svg class="w-24 h-24 text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="flex items-center justify-center gap-3 mb-4 z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/50">
+                                <span class="text-xl">🤔</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
+                                <span class="text-xl">💡</span>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center border border-cyan-500/50">
+                                <span class="text-xl">🏆</span>
+                            </div>
+                        </div>
+                        <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm z-10"
+                            data-i18n="s4.scenario">Scénarios
+                            Réalistes</span>
+                    </div>
+                    <p class="text-slate-400 text-sm" data-i18n="s4.desc">Tester les connaissances permet d'ancrer les
+                        réflexes par la
+                        pratique immédiate lors des sessions.</p>
+                </div>
+                <div class="glass p-6 rounded-xl border border-slate-700" id="quizContainer">
+                    <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider mb-2 block"
+                        data-i18n="s4.q_label">Question
+                        1/3</span>
+                    <h3 class="text-lg font-bold text-white mb-4" id="quizQuestion" data-i18n="s4.q">Vous recevez un
+                        email de votre DSI
+                        vous demandant de valider votre mot de passe via un lien. Que faites-vous ?</h3>
+                    <div class="flex flex-col gap-3" id="quizOptions">
+                        <button onclick="checkAnswer(0)"
+                            class="text-left p-3 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all font-medium text-sm"
+                            data-i18n="s4.optA">A.
+                            Je clique et je me connecte rapidement.</button>
+                        <button onclick="checkAnswer(1)"
+                            class="text-left p-3 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all font-medium text-sm"
+                            data-i18n="s4.optB">B.
+                            Je transfère l'email à un collègue pour savoir s'il l'a reçu.</button>
+                        <button onclick="checkAnswer(2)"
+                            class="text-left p-3 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all font-medium text-sm focus:ring-2 ring-indigo-500"
+                            data-i18n="s4.optC">C.
+                            Je signale l'email via le bouton Outlook ou j'appelle le support.</button>
+                    </div>
+                    <div id="quizResult" class="hidden mt-4 p-3 rounded text-sm border"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- F. Impact & Valeur (Recruteur) -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-orange-500 font-mono text-xl font-bold">05.</span>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s5.title">L'Impact d'une Sensibilisation Réussie
+                </h2>
+            </div>
+
+            <div class="mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-emerald-400 font-bold text-2xl mb-1">↑</div>
+                    <div class="text-white text-sm font-semibold" data-i18n="s5.kpi1.title">Signalements Pertinents
+                    </div>
+                    <div class="text-xs text-slate-500" data-i18n="s5.kpi1.desc">Culture de l'alerte</div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-emerald-400 font-bold text-2xl mb-1">↓</div>
+                    <div class="text-white text-sm font-semibold" data-i18n="s5.kpi2.title">Clics Suspects</div>
+                    <div class="text-xs text-slate-500" data-i18n="s5.kpi2.desc">Baisse du phishing</div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-cyan-400 font-bold text-2xl mb-1"><svg class="w-6 h-6 mx-auto" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg></div>
+                    <div class="text-white text-sm font-semibold" data-i18n="s5.kpi3.title">Application Mises à jour
+                    </div>
+                    <div class="text-xs text-slate-500" data-i18n="s5.kpi3.desc">Hygiène IT</div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-cyan-400 font-bold text-2xl mb-1"><svg class="w-6 h-6 mx-auto" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg></div>
+                    <div class="text-white text-sm font-semibold" data-i18n="s5.kpi4.title">Postes Verrouillés</div>
+                    <div class="text-xs text-slate-500" data-i18n="s5.kpi4.desc">Sécurité physique</div>
+                </div>
+            </div>
+
+            <div class="glass p-6 rounded-xl border-l-4 border-cyan-500 flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="s5.deliv.title">Mes Livrables</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> <span data-i18n="s5.deliv.l1">Support de présentation adapté</span></li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> <span data-i18n="s5.deliv.l2">Fiches Mémo "Règles d'or" (imprimables)</span></li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> <span data-i18n="s5.deliv.l3">Formulaires de Quiz interactifs</span></li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-cyan-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg> <span data-i18n="s5.deliv.l4">Procédures claires de signalement d'incident</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/3 text-slate-400 text-sm italic border-l border-slate-700 pl-6 py-2"
+                    data-i18n="s5.quote">
+                    "Transformer le facteur humain en première ligne de défense, c'est réduire mathématiquement la
+                    surface d'attaque de votre organisation."
+                </div>
+            </div>
+        </section>
+
+        <!-- G. Règles d'or -->
+        <section class="mb-16">
+            <div
+                class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl border border-slate-700 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-xl font-bold text-white mb-6 uppercase tracking-wider text-center" data-i18n="s6.title">
+                    Les 5 Règles d'Or
+                    Fondamentales</h3>
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-slate-800 text-cyan-400 font-bold rounded p-2 h-10 w-10 flex items-center justify-center shrink-0 border border-slate-700">
+                            1</div>
+                        <div>
+                            <h4 class="text-white font-bold" data-i18n="s6.r1.title">Le doute profite à la sécurité</h4>
+                            <p class="text-sm text-slate-400" data-i18n="s6.r1.desc">Si un email, une demande ou un lien
+                                vous semble suspect,
+                                arrêtez-vous et signalez-le.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-slate-800 text-cyan-400 font-bold rounded p-2 h-10 w-10 flex items-center justify-center shrink-0 border border-slate-700">
+                            2</div>
+                        <div>
+                            <h4 class="text-white font-bold" data-i18n="s6.r2.title">Mon mot de passe m'appartient</h4>
+                            <p class="text-sm text-slate-400" data-i18n="s6.r2.desc">Je ne le donne jamais, ni à mon
+                                chef, ni à la DSI, ni
+                                l'écris sur un post-it.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-slate-800 text-cyan-400 font-bold rounded p-2 h-10 w-10 flex items-center justify-center shrink-0 border border-slate-700">
+                            3</div>
+                        <div>
+                            <h4 class="text-white font-bold" data-i18n="s6.r3.title">Je m'absente = Je verrouille</h4>
+                            <p class="text-sm text-slate-400" data-i18n="s6.r3.desc">Mon poste de travail reflète mon
+                                identité numérique, je le
+                                protège physiquement.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-slate-800 text-cyan-400 font-bold rounded p-2 h-10 w-10 flex items-center justify-center shrink-0 border border-slate-700">
+                            4</div>
+                        <div>
+                            <h4 class="text-white font-bold" data-i18n="s6.r4.title">Les données professionnelles sur
+                                les outils pros</h4>
+                            <p class="text-sm text-slate-400" data-i18n="s6.r4.desc">J'évite la clé USB personnelle et
+                                j'utilise toujours les
+                                moyens d'échange validés par l'organisation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-slate-800 text-cyan-400 font-bold rounded p-2 h-10 w-10 flex items-center justify-center shrink-0 border border-slate-700">
+                            5</div>
+                        <div>
+                            <h4 class="text-white font-bold" data-i18n="s6.r5.title">Mettre à jour, c'est se protéger
+                            </h4>
+                            <p class="text-sm text-slate-400" data-i18n="s6.r5.desc">J'applique les redémarrages
+                                demandés par le système ou le
+                                smartphone pour boucher les failles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- H. CTA Final -->
+        <section class="mb-16 text-center bg-slate-900 border border-slate-800 p-12 rounded-2xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-6" data-i18n="cta.title">Vous cherchez quelqu'un
+                capable de sensibiliser
+                et d'embarquer les équipes ? Parlons-en.</h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:madiane.sahli@hotmail.com"
+                    class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 px-8 rounded-lg transition-colors shadow-lg shadow-cyan-500/20 text-lg"
+                    data-i18n="cta.btnPrimary">
+                    Contact
+                </a>
+                <a href="index.html#projects"
+                    class="border border-slate-600 hover:bg-slate-800 text-white font-medium py-3 px-8 rounded-lg transition-colors text-lg"
+                    data-i18n="cta.btnSecondary">
+                    Retour aux projets
+                </a>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
+            <p class="mb-2"><span data-i18n="footer.built">Réalisé par</span> Madiane SAHLI</p>
+            <p class="text-xs" data-i18n="footer.role">Expertise Déploiement & Sécurité</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- QUIZ LOGIC ---
+        function checkAnswer(index) {
+            const resultDiv = document.getElementById('quizResult');
+            resultDiv.classList.remove('hidden', 'bg-emerald-900/50', 'bg-red-900/50', 'border-emerald-500', 'border-red-500', 'text-emerald-300', 'text-red-300');
+
+            if (index === 2) {
+                resultDiv.classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
+                resultDiv.innerHTML = `<strong>Bonne réponse !</strong> 🎯 La DSI ne demande jamais un mot de passe par mail (ni au téléphone). Le bon réflexe est de signaler la tentative.`;
+            } else {
+                resultDiv.classList.add('bg-red-900/50', 'border-red-500', 'text-red-300');
+                resultDiv.innerHTML = `<strong>Attention !</strong> ❌ C'est un cas typique de phishing (hameçonnage). La DSI ne vous demandera jamais votre mot de passe par email. Il faut le signaler.`;
+            }
+        }
+
+        // --- LANG TOGGLE LOGIC ---
+        const langToggle = document.getElementById('langToggle');
+        const langOpts = document.querySelectorAll('.lang-opt');
+
+        const i18n = {
+            fr: {
+                nav: { back: "Retour au Portfolio" },
+                hero: {
+                    title: "Programme de <span class=\"gradient-text\">Sensibilisation</span> Cybersécurité",
+                    desc: "Transformer les règles de sécurité en réflexes quotidiens. Une approche alliant pédagogie, cas pratiques et culture de la sécurité pour les agents et les métiers de la collectivité.",
+                    btnOutline: "Voir la trame d'une session",
+                    btnContact: "Me contacter"
+                },
+                s1: {
+                    title: "Pourquoi Sensibiliser ? Les 4 Piliers CIAA",
+                    c1: { title: "Confidentialité", desc: "Garantir que seules les personnes autorisées accèdent aux données.", ex: "→ Au quotidien : \"Je verrouille mon poste dès que je m'absente.\"" },
+                    c2: { title: "Intégrité", desc: "Assurer que les informations n'ont pas été altérées ou corrompues.", ex: "→ Au quotidien : \"Je vérifie l'expéditeur avant d'ouvrir une pièce jointe inattendue.\"" },
+                    c3: { title: "Disponibilité", desc: "Maintenir l'accès aux services et systèmes essentiels à l'organisation.", ex: "→ Au quotidien : \"Je sauvegarde mes documents critiques sur les espaces réseau validés.\"" },
+                    c4: { title: "Auditabilité (Preuve)", desc: "Tracer les actions pour identifier la source d'un incident.", ex: "→ Au quotidien : \"Je ne partage jamais mes identifiants professionnels.\"" }
+                },
+                s2: {
+                    title: "Ma Méthodologie d'Intervention",
+                    t1: { title: "Cadrage", desc: "Analyse du public cible, identification des risques métiers et intégration des contraintes organisationnelles." },
+                    t2: { title: "Contenu Sur-Mesure", desc: "Adaptation des messages selon les directions (Finances, RH, Accueil, etc.) pour un impact concret." },
+                    t3: { title: "Démo & Cas Concrets", desc: "Démonstrations visuelles : analyse d'un vrai phishing, test de mots de passe, simulation de poste non verrouillé." },
+                    t4: { title: "Atelier / Quiz", desc: "Moments d'échange interactifs (questions-réponses, quiz rapides) pour ancrer les connaissances." },
+                    t5: { title: "Feedback & Amélioration Continue", desc: "Mesure de l'attention, recueil des retours agents et itération sur les futurs modules de sensibilisation." }
+                },
+                s3: {
+                    title: "Au Cœur des Sessions",
+                    c1: { title: "Risques & Menaces", desc: "Comprendre le malware, ransomware, et l'ingénierie sociale.", ex: "Ex: \"La clé USB trouvée sur le parking : pourquoi il ne faut jamais la brancher.\"" },
+                    c2: { title: "Sécuriser son poste", desc: "Verrouillage, mises à jour, et sécurité physique des équipements.", ex: "Ex: \"Win + L est votre meilleur ami à chaque pause café.\"" },
+                    c3: { title: "Mots de passe robustes", desc: "Techniques de création (phonétique, 1ères lettres) et gestion de vos secrets.", ex: "Ex: \"J'aime prendre un ☕ à 8h!\" → `J'apu☕à8h!`" },
+                    c4: { title: "Déjouer le Phishing", desc: "Repérer les signaux d'alerte : urgence, URL suspecte, homoglyphes.", from: "De : Service Public &lt;<span class=\"text-red-400 font-mono\">arneli-vitu@gouv.fr</span>&gt;", subject: "Objet : Remboursement en attente", ex: "Ex: \"Vérifiez toujours le nom de domaine exact, pas juste l'affichage.\"" },
+                    c5: { title: "Sécurité en Collectivité", desc: "Comprendre l'environnement : PSSI, EDR, Sauvegardes et Signalement DSI.", desk: "Bureau (C:)", cloud: "Disque Réseau", ex: "Ex: \"Ce qui est sur le bureau (C:) ne survit pas toujours, utilisez les disques réseaux !\"" },
+                    c6: { title: "IA & Usages", desc: "Usage raisonné de ChatGPT et autres IA : protection des données internes et RGPD.", ex: "Ex: \"Ne copiez/collez jamais de données nominatives dans une IA grand public.\"" }
+                },
+                s4: {
+                    title: "Quiz Express Interactif",
+                    scenario: "Scénarios Réalistes",
+                    desc: "Tester les connaissances permet d'ancrer les réflexes par la pratique immédiate lors des sessions.",
+                    q_label: "Question 1/3",
+                    q: "Vous recevez un email de votre DSI vous demandant de valider votre mot de passe via un lien. Que faites-vous ?",
+                    optA: "A. Je clique et je me connecte rapidement.",
+                    optB: "B. Je transfère l'email à un collègue pour savoir s'il l'a reçu.",
+                    optC: "C. Je signale l'email via le bouton Outlook ou j'appelle le support.",
+                    resCorrect: "<strong>Bonne réponse !</strong> 🎯 La DSI ne demande jamais un mot de passe par mail (ni au téléphone). Le bon réflexe est de signaler la tentative.",
+                    resWrong: "<strong>Attention !</strong> ❌ C'est un cas typique de phishing (hameçonnage). La DSI ne vous demandera jamais votre mot de passe par email. Il faut le signaler."
+                },
+                s5: {
+                    title: "L'Impact d'une Sensibilisation Réussie",
+                    kpi1: { title: "Signalements Pertinents", desc: "Culture de l'alerte" },
+                    kpi2: { title: "Clics Suspects", desc: "Baisse du phishing" },
+                    kpi3: { title: "Application Mises à jour", desc: "Hygiène IT" },
+                    kpi4: { title: "Postes Verrouillés", desc: "Sécurité physique" },
+                    deliv: { title: "Mes Livrables", l1: "Support de présentation adapté", l2: "Fiches Mémo \"Règles d'or\" (imprimables)", l3: "Formulaires de Quiz interactifs", l4: "Procédures claires de signalement d'incident" },
+                    quote: "\"Transformer le facteur humain en première ligne de défense, c'est réduire mathématiquement la surface d'attaque de votre organisation.\""
+                },
+                s6: {
+                    title: "Les 5 Règles d'Or Fondamentales",
+                    r1: { title: "Le doute profite à la sécurité", desc: "Si un email, une demande ou un lien vous semble suspect, arrêtez-vous et signalez-le." },
+                    r2: { title: "Mon mot de passe m'appartient", desc: "Je ne le donne jamais, ni à mon chef, ni à la DSI, ni l'écris sur un post-it." },
+                    r3: { title: "Je m'absente = Je verrouille", desc: "Mon poste de travail reflète mon identité numérique, je le protège physiquement." },
+                    r4: { title: "Les données professionnelles sur les outils pros", desc: "J'évite la clé USB personnelle et j'utilise toujours les moyens d'échange validés par l'organisation." },
+                    r5: { title: "Mettre à jour, c'est se protéger", desc: "J'applique les redémarrages demandés par le système ou le smartphone pour boucher les failles." }
+                },
+                cta: {
+                    title: "Vous cherchez quelqu'un capable de sensibiliser et d'embarquer les équipes ? Parlons-en.",
+                    btnPrimary: "Contact",
+                    btnSecondary: "Retour aux projets"
+                },
+                footer: { built: "Réalisé par", role: "Expertise Déploiement & Sécurité" }
+            },
+            en: {
+                nav: { back: "Back to Portfolio" },
+                hero: {
+                    title: "Cybersecurity <span class=\"gradient-text\">Awareness</span> Program",
+                    desc: "Transforming security rules into daily reflexes. An approach combining pedagogy, practical cases, and security culture for staff and business units.",
+                    btnOutline: "View a Session Outline",
+                    btnContact: "Contact Me"
+                },
+                s1: {
+                    title: "Why Raise Awareness? The 4 CIAA Pillars",
+                    c1: { title: "Confidentiality", desc: "Ensuring only authorized individuals access data.", ex: "→ Daily: \"I lock my workstation as soon as I leave.\"" },
+                    c2: { title: "Integrity", desc: "Ensuring information has not been altered or corrupted.", ex: "→ Daily: \"I check the sender before opening an unexpected attachment.\"" },
+                    c3: { title: "Availability", desc: "Maintaining access to essential services and systems.", ex: "→ Daily: \"I save my critical documents on validated network spaces.\"" },
+                    c4: { title: "Accountability (Proof)", desc: "Tracking actions to identify the source of an incident.", ex: "→ Daily: \"I never share my professional credentials.\"" }
+                },
+                s2: {
+                    title: "My Intervention Methodology",
+                    t1: { title: "Scoping", desc: "Analysis of the target audience, identification of business risks, and integration of organizational constraints." },
+                    t2: { title: "Tailored Content", desc: "Adapting messages according to departments (Finance, HR, Reception, etc.) for concrete impact." },
+                    t3: { title: "Demos & Practical Cases", desc: "Visual demonstrations: analyzing real phishing, password testing, unlocked workstation simulation." },
+                    t4: { title: "Workshop / Quiz", desc: "Interactive exchange moments (Q&A, quick quizzes) to anchor knowledge." },
+                    t5: { title: "Feedback & Continuous Improvement", desc: "Measuring attention, gathering staff feedback, and iterating on future awareness modules." }
+                },
+                s3: {
+                    title: "At the Heart of the Sessions",
+                    c1: { title: "Risks & Threats", desc: "Understanding malware, ransomware, and social engineering.", ex: "Ex: \"The USB drive found in the parking lot: why you should never plug it in.\"" },
+                    c2: { title: "Securing your workstation", desc: "Locking, updates, and physical security of equipment.", ex: "Ex: \"Win + L is your best friend at every coffee break.\"" },
+                    c3: { title: "Strong Passwords", desc: "Creation techniques (phonetics, first letters) and managing your secrets.", ex: "Ex: \"I like taking a ☕ at 8am!\" → `Iltak☕@8am!`" },
+                    c4: { title: "Thwarting Phishing", desc: "Spotting warning signs: urgency, suspicious URL, homoglyphs.", from: "From: Public Service &lt;<span class=\"text-red-400 font-mono\">arneli-vitu@gouv.fr</span>&gt;", subject: "Subject: Refund Pending", ex: "Ex: \"Always check the exact domain name, not just the display name.\"" },
+                    c5: { title: "Security in Public Sector", desc: "Understanding the environment: ISSP, EDR, Backups, and IT Reporting.", desk: "Desktop (C:)", cloud: "Network Drive", ex: "Ex: \"What's on the desktop (C:) doesn't always survive, use network drives!\"" },
+                    c6: { title: "AI & Usage", desc: "Reasoned use of ChatGPT and other AIs: protection of internal data and GDPR.", ex: "Ex: \"Never copy/paste personal data into a public AI.\"" }
+                },
+                s4: {
+                    title: "Interactive Express Quiz",
+                    scenario: "Realistic Scenarios",
+                    desc: "Testing knowledge anchors reflexes through immediate practice during sessions.",
+                    q_label: "Question 1/3",
+                    q: "You receive an email from your IT Dept asking you to validate your password via a link. What do you do?",
+                    optA: "A. I click and log in quickly.",
+                    optB: "B. I forward the email to a colleague to see if they received it.",
+                    optC: "C. I report the email via the Outlook button or call support.",
+                    resCorrect: "<strong>Correct!</strong> 🎯 IT never asks for a password by email (or phone). The right reflex is to report the attempt.",
+                    resWrong: "<strong>Careful!</strong> ❌ This is a typical phishing case. IT will never ask for your password by email. You must report it."
+                },
+                s5: {
+                    title: "The Impact of Successful Awareness",
+                    kpi1: { title: "Relevant Reports", desc: "Alert Culture" },
+                    kpi2: { title: "Suspicious Clicks", desc: "Decrease in phishing" },
+                    kpi3: { title: "Applying Updates", desc: "IT Hygiene" },
+                    kpi4: { title: "Locked Workstations", desc: "Physical security" },
+                    deliv: { title: "My Deliverables", l1: "Tailored presentation materials", l2: "Printable 'Golden Rules' memos", l3: "Interactive Quiz forms", l4: "Clear incident reporting procedures" },
+                    quote: "\"Transforming the human factor into the first line of defense mathematically reduces your organization's attack surface.\""
+                },
+                s6: {
+                    title: "The 5 Fundamental Golden Rules",
+                    r1: { title: "Doubt benefits security", desc: "If an email, request, or link seems suspicious to you, stop and report it." },
+                    r2: { title: "My password belongs to me", desc: "I never give it, neither to my boss, nor IT, nor write it on a post-it." },
+                    r3: { title: "I leave = I lock", desc: "My workstation reflects my digital identity, I protect it physically." },
+                    r4: { title: "Professional data on pro tools", desc: "I avoid personal USB drives and always use exchange methods validated by the organization." },
+                    r5: { title: "Updating is protecting", desc: "I apply restarts requested by the system or smartphone to patch vulnerabilities." }
+                },
+                cta: {
+                    title: "Looking for someone capable of raising awareness and onboarding teams? Let's talk.",
+                    btnPrimary: "Contact",
+                    btnSecondary: "Back to projects"
+                },
+                footer: { built: "Built by", role: "Deployment & Security Expertise" }
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('portfolio_lang', lang);
+
+            langOpts.forEach(opt => {
+                if (opt.dataset.lang === lang) opt.classList.add('active');
+                else opt.classList.remove('active');
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let val = i18n[lang];
+                for (let k of keys) {
+                    if (val) val = val[k];
+                }
+                if (val) el.innerHTML = val;
+            });
+
+            // Re-evalute quiz result if visible to translate it
+            const resultDiv = document.getElementById('quizResult');
+            if (!resultDiv.classList.contains('hidden')) {
+                if (resultDiv.classList.contains('bg-emerald-900/50')) {
+                    resultDiv.innerHTML = i18n[lang].s4.resCorrect;
+                } else {
+                    resultDiv.innerHTML = i18n[lang].s4.resWrong;
+                }
+            }
+        }
+
+        langOpts.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(opt.dataset.lang);
+            });
+        });
+
+        langToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const currentLang = localStorage.getItem('portfolio_lang') || 'fr';
+                setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+            }
+        });
+
+        // Init language
+        const savedLang = localStorage.getItem('portfolio_lang') || 'fr';
+        setLanguage(savedLang);
+
+        // Update quizLogic to use i18n
+        function checkAnswer(index) {
+            const resultDiv = document.getElementById('quizResult');
+            const lang = localStorage.getItem('portfolio_lang') || 'fr';
+            resultDiv.classList.remove('hidden', 'bg-emerald-900/50', 'bg-red-900/50', 'border-emerald-500', 'border-red-500', 'text-emerald-300', 'text-red-300');
+
+            if (index === 2) {
+                resultDiv.classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
+                resultDiv.innerHTML = i18n[lang].s4.resCorrect;
+            } else {
+                resultDiv.classList.add('bg-red-900/50', 'border-red-500', 'text-red-300');
+                resultDiv.innerHTML = i18n[lang].s4.resWrong;
+            }
+        }
+
+        // Disable old quizLogic block
+        /*
+        function checkAnswer(index) { ... }
+        */
+
+        // --- CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+        function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+        animateRing();
+        document.querySelectorAll('a, button, input, .nav-lang-toggle').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursor.classList.add('active'); ring.classList.add('active'); });
+            el.addEventListener('mouseleave', () => { cursor.classList.remove('active'); ring.classList.remove('active'); });
+        });
+    </script>
+</body>
+
+</html>
