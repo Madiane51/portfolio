@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum - Comprendre les Risques Quantiques</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L90 20 V50 C90 75 50 95 50 95 C50 95 10 75 10 50 V20 Z' fill='%23050810' stroke='%2300d4ff' stroke-width='5'/><text x='50' y='60' fill='%2300d4ff' font-family='sans-serif' font-size='40' text-anchor='middle'>✔</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L90 20 V50 C90 75 50 95 50 95 C50 95 10 75 10 50 V20 Z' fill='%23050810' stroke='%2300d4ff' stroke-width='5'/><text x='50' y='60' fill='%2300d4ff' font-family='sans-serif' font-size='40' text-anchor='middle'>✔</text></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                cyan: {
-                  400: '#00d4ff', // Portfolio Accent
-                  500: '#00b8e6',
-                  600: '#009cc2',
-                },
-                slate: {
-                  900: '#050810', // Portfolio BG
+            theme: {
+                extend: {
+                    colors: {
+                        cyan: {
+                            400: '#00d4ff', // Portfolio Accent
+                            500: '#00b8e6',
+                            600: '#009cc2',
+                        },
+                        slate: {
+                            900: '#050810', // Portfolio BG
+                        }
+                    }
                 }
-              }
             }
-          }
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050810; cursor: none; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050810;
+            cursor: none;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         .glass {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(10px);
@@ -35,22 +47,25 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
+
         .glass:hover {
             border-color: rgba(34, 211, 238, 0.2);
             box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
         }
+
         .gradient-text {
             background: linear-gradient(to right, #22d3ee, #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         /* Custom Range Slider */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
             background: transparent;
         }
+
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             height: 20px;
@@ -61,6 +76,7 @@
             margin-top: -8px;
             box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
         }
+
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
@@ -68,7 +84,7 @@
             background: #1e293b;
             border-radius: 2px;
         }
-        
+
         /* Accordion Transitions */
         .accordion-content {
             transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
@@ -76,12 +92,19 @@
             opacity: 0;
             overflow: hidden;
         }
+
         .accordion-content.active {
             max-height: 500px;
             opacity: 1;
         }
-        .chevron { transition: transform 0.3s ease; }
-        .chevron.rotate { transform: rotate(180deg); }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .chevron.rotate {
+            transform: rotate(180deg);
+        }
 
         /* Timeline Connector */
         .timeline-line::before {
@@ -94,26 +117,98 @@
             background: #1e293b;
             z-index: -1;
         }
-        
+
         /* CUSTOM CURSOR */
         .cursor {
-            position: fixed; width: 12px; height: 12px; background: #00d4ff; border-radius: 50%;
-            pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
-            transition: transform 0.1s, background 0.2s; box-shadow: 0 0 15px #00d4ff;
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: #00d4ff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s, background 0.2s;
+            box-shadow: 0 0 15px #00d4ff;
         }
+
         .cursor-ring {
-            position: fixed; width: 36px; height: 36px; border: 1px solid rgba(0, 212, 255, 0.5);
-            border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
             transition: all 0.12s ease;
         }
-        .cursor.active { transform: translate(-50%, -50%) scale(1.5); background: #00ff88; }
-        .cursor-ring.active { width: 50px; height: 50px; border-color: #00ff88; }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: #00ff88;
+        }
+
+        .cursor-ring.active {
+            width: 50px;
+            height: 50px;
+            border-color: #00ff88;
+        }
+
         @media (hover: none) and (pointer: coarse) {
-            .cursor, .cursor-ring { display: none !important; }
-            body { cursor: auto; }
+
+            .cursor,
+            .cursor-ring {
+                display: none !important;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* Lang Toggle */
+        .nav-lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            padding: 2px;
+            position: relative;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .nav-lang-toggle:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+
+        .nav-lang-toggle:focus-visible {
+            outline: 2px solid #00d4ff;
+            outline-offset: 2px;
+        }
+
+        .lang-opt {
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #94a3b8;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            z-index: 1;
+            user-select: none;
+            text-decoration: none;
+        }
+
+        .lang-opt.active {
+            color: #ffffff;
+            background: #0f172a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
+
 <body class="text-slate-300 min-h-screen flex flex-col items-center pt-6 px-4 pb-12">
 
     <div class="cursor" id="cursor"></div>
@@ -121,53 +216,104 @@
 
     <nav class="w-full max-w-5xl flex justify-between items-center mb-12">
         <div class="flex items-center gap-3">
-            <div class="h-8 w-8 bg-cyan-600 rounded flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-900/50">Q</div>
-            <a href="index.html" class="font-bold text-white hover:text-cyan-400 transition-colors">Quantum exposure <span class="text-cyan-500">MS//SEC</span></a>
+            <div
+                class="h-8 w-8 bg-cyan-600 rounded flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-900/50">
+                Q</div>
+            <a href="index.html" class="font-bold text-white hover:text-cyan-400 transition-colors">Quantum exposure
+                <span class="text-cyan-500">MS//SEC</span></a>
         </div>
-        <a href="index.html" class="group flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors border border-slate-800 rounded-full px-4 py-2 hover:bg-slate-800">
-            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Retour au Portfolio
-        </a>
+        <div class="flex items-center gap-6">
+            <!-- Lang toggle -->
+            <div class="nav-lang-toggle" id="langToggle" tabindex="0" role="button" aria-label="Toggle language">
+                <span class="lang-opt active" data-lang="fr">FR</span>
+                <span class="lang-opt" data-lang="en">EN</span>
+            </div>
+
+            <a href="index.html#projects" data-i18n="nav.back"
+                class="group flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors border border-slate-800 rounded-full px-4 py-2 hover:bg-slate-800">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+                Retour au Portfolio
+            </a>
+        </div>
     </nav>
 
     <main class="w-full max-w-4xl">
-        
+
         <header class="text-center mb-16 fade-in">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">La Menace <span class="gradient-text">Post-Quantique</span></h1>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                Pourquoi se mettre en conformité aujourd'hui pour une menace de demain ? Comprendre l'impact de l'algorithme de Shor et la stratégie "Harvest Now, Decrypt Later".
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" data-i18n="hero.title">La Menace <span
+                    class="gradient-text">Post-Quantique</span></h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto" data-i18n="hero.desc">
+                Pourquoi se mettre en conformité aujourd'hui pour une menace de demain ? Comprendre l'impact de
+                l'algorithme de Shor et la stratégie "Harvest Now, Decrypt Later".
             </p>
         </header>
 
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-cyan-500 font-mono text-xl font-bold">01.</span>
-                <h2 class="text-2xl font-bold text-white">L'Urgence : Harvest Now, Decrypt Later</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s1.title">L'Urgence : Harvest Now, Decrypt Later
+                </h2>
             </div>
-            
+
             <div class="glass rounded-xl p-8 border-l-4 border-red-500">
-                <p class="mb-6 leading-relaxed">
-                    Même si l'ordinateur quantique "cryptographiquement pertinent" (CRQC) n'existe pas encore, vos données sont déjà en danger. Les attaquants interceptent et stockent le trafic chiffré aujourd'hui pour le déchiffrer dans 5, 10 ou 15 ans.
+                <p class="mb-6 leading-relaxed" data-i18n="s1.desc">
+                    Même si l'ordinateur quantique "cryptographiquement pertinent" (CRQC) n'existe pas encore, vos
+                    données sont déjà en danger. Les attaquants interceptent et stockent le trafic chiffré aujourd'hui
+                    pour le déchiffrer dans 5, 10 ou 15 ans.
                 </p>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-cyan-500/50 transition-colors">
-                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-cyan-400 font-bold border border-slate-700">AUJOURD'HUI</div>
-                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                        <h3 class="text-white font-bold text-center mb-1">Interception</h3>
-                        <p class="text-xs text-center text-slate-400">Collecte massive de données chiffrées (VPN, HTTPS, TLS).</p>
+                    <div
+                        class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-cyan-500/50 transition-colors">
+                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-cyan-400 font-bold border border-slate-700"
+                            data-i18n="s1.c1.badge">
+                            AUJOURD'HUI</div>
+                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg></div>
+                        <h3 class="text-white font-bold text-center mb-1" data-i18n="s1.c1.title">Interception</h3>
+                        <p class="text-xs text-center text-slate-400" data-i18n="s1.c1.desc">Collecte massive de données
+                            chiffrées (VPN, HTTPS,
+                            TLS).</p>
                     </div>
-                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-orange-500/50 transition-colors">
-                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-orange-400 font-bold border border-slate-700">STOCKAGE</div>
-                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg></div>
-                        <h3 class="text-white font-bold text-center mb-1">Conservation</h3>
-                        <p class="text-xs text-center text-slate-400">Les données dorment dans des serveurs en attente.</p>
+                    <div
+                        class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-orange-500/50 transition-colors">
+                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-orange-400 font-bold border border-slate-700"
+                            data-i18n="s1.c2.badge">
+                            STOCKAGE</div>
+                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                                </path>
+                            </svg></div>
+                        <h3 class="text-white font-bold text-center mb-1" data-i18n="s1.c2.title">Conservation</h3>
+                        <p class="text-xs text-center text-slate-400" data-i18n="s1.c2.desc">Les données dorment dans
+                            des serveurs en attente.
+                        </p>
                     </div>
-                    <div class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-red-500/50 transition-colors">
-                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-red-500 font-bold border border-slate-700">FUTUR (2030+)</div>
-                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg></div>
-                        <h3 class="text-white font-bold text-center mb-1">Déchiffrement</h3>
-                        <p class="text-xs text-center text-slate-400">Shor casse la clé RSA/ECC et révèle les secrets.</p>
+                    <div
+                        class="bg-slate-900/50 p-4 rounded border border-slate-700 relative hover:border-red-500/50 transition-colors">
+                        <div class="absolute -top-3 left-4 bg-slate-800 text-xs px-2 py-1 rounded text-red-500 font-bold border border-slate-700"
+                            data-i18n="s1.c3.badge">
+                            FUTUR (2030+)</div>
+                        <div class="flex justify-center mb-3 text-slate-500"><svg class="w-8 h-8" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
+                                </path>
+                            </svg></div>
+                        <h3 class="text-white font-bold text-center mb-1" data-i18n="s1.c3.title">Déchiffrement</h3>
+                        <p class="text-xs text-center text-slate-400" data-i18n="s1.c3.desc">Shor casse la clé RSA/ECC
+                            et révèle les secrets.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -176,16 +322,20 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-cyan-500 font-mono text-xl font-bold">02.</span>
-                <h2 class="text-2xl font-bold text-white">Shor vs. Grover : Pourquoi RSA est "Mort"</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s2.title">Shor vs. Grover : Pourquoi RSA est "Mort"
+                </h2>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass p-6 rounded-xl border border-slate-800">
                     <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Algorithme de Shor
+                        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> <span
+                            data-i18n="s2.c1.title">Algorithme de Shor</span>
                     </h3>
-                    <p class="text-xs text-red-300 font-mono mb-4 uppercase tracking-wider bg-red-900/20 inline-block px-2 py-1 rounded">Impact Critique</p>
-                    <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside">
+                    <p class="text-xs text-red-300 font-mono mb-4 uppercase tracking-wider bg-red-900/20 inline-block px-2 py-1 rounded"
+                        data-i18n="s2.c1.badge">
+                        Impact Critique</p>
+                    <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside" data-i18n="s2.c1.desc">
                         <li>Cible la <strong class="text-white">cryptographie asymétrique</strong>.</li>
                         <li>Rend obsolètes : <span class="font-mono text-cyan-400">RSA, ECC, DH</span>.</li>
                         <li>Conséquence : Effondrement de PKI et HTTPS.</li>
@@ -194,10 +344,13 @@
 
                 <div class="glass p-6 rounded-xl border border-slate-800">
                     <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-orange-400"></span> Algorithme de Grover
+                        <span class="w-2 h-2 rounded-full bg-orange-400"></span> <span
+                            data-i18n="s2.c2.title">Algorithme de Grover</span>
                     </h3>
-                    <p class="text-xs text-orange-300 font-mono mb-4 uppercase tracking-wider bg-orange-900/20 inline-block px-2 py-1 rounded">Impact Modéré</p>
-                    <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside">
+                    <p class="text-xs text-orange-300 font-mono mb-4 uppercase tracking-wider bg-orange-900/20 inline-block px-2 py-1 rounded"
+                        data-i18n="s2.c2.badge">
+                        Impact Modéré</p>
+                    <ul class="space-y-2 text-sm text-slate-400 list-disc list-inside" data-i18n="s2.c2.desc">
                         <li>Cible la <strong class="text-white">cryptographie symétrique</strong>.</li>
                         <li>Divise la force brute par 2 (racine carrée).</li>
                         <li>Solution : <strong class="text-white">AES-128 → AES-256</strong>.</li>
@@ -209,26 +362,35 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-emerald-500 font-mono text-xl font-bold">03.</span>
-                <h2 class="text-2xl font-bold text-white">La Solution : Cryptographie Post-Quantique</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s3.title">La Solution : Cryptographie
+                    Post-Quantique</h2>
             </div>
-            
+
             <div class="glass rounded-xl p-8 border-l-4 border-emerald-500">
-                <p class="mb-4 leading-relaxed">
-                    Le NIST a standardisé de nouveaux algorithmes mathématiques (Lattice-based cryptography) résistants aux attaques quantiques.
+                <p class="mb-4 leading-relaxed" data-i18n="s3.desc">
+                    Le NIST a standardisé de nouveaux algorithmes mathématiques (Lattice-based cryptography) résistants
+                    aux attaques quantiques.
                 </p>
                 <div class="mt-6 space-y-4">
                     <div class="flex items-start gap-4">
-                        <div class="bg-slate-800 p-2 rounded text-emerald-400 font-mono text-sm font-bold whitespace-nowrap border border-slate-700">FIPS 203</div>
+                        <div
+                            class="bg-slate-800 p-2 rounded text-emerald-400 font-mono text-sm font-bold whitespace-nowrap border border-slate-700">
+                            FIPS 203</div>
                         <div>
                             <h4 class="text-white font-bold">ML-KEM (Kyber)</h4>
-                            <p class="text-sm text-slate-400">Standard pour l'échange de clés (KEM).</p>
+                            <p class="text-sm text-slate-400" data-i18n="s3.c1.desc">Standard pour l'échange de clés
+                                (KEM).</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="bg-slate-800 p-2 rounded text-emerald-400 font-mono text-sm font-bold whitespace-nowrap border border-slate-700">FIPS 204</div>
+                        <div
+                            class="bg-slate-800 p-2 rounded text-emerald-400 font-mono text-sm font-bold whitespace-nowrap border border-slate-700">
+                            FIPS 204</div>
                         <div>
                             <h4 class="text-white font-bold">ML-DSA (Dilithium)</h4>
-                            <p class="text-sm text-slate-400">Standard pour la signature numérique et l'authentification.</p>
+                            <p class="text-sm text-slate-400" data-i18n="s3.c2.desc">Standard pour la signature
+                                numérique et
+                                l'authentification.</p>
                         </div>
                     </div>
                 </div>
@@ -238,65 +400,109 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-purple-500 font-mono text-xl font-bold">04.</span>
-                <h2 class="text-2xl font-bold text-white">Comprendre le Mécanisme</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s4.title">Comprendre le Mécanisme</h2>
             </div>
 
             <div class="space-y-4">
                 <div class="glass rounded-xl overflow-hidden border border-slate-800">
-                    <button class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors" onclick="toggleAccordion('acc-1')">
+                    <button
+                        class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors"
+                        onclick="toggleAccordion('acc-1')">
                         <div class="flex items-center gap-3">
-                            <span class="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-2 py-1 rounded border border-emerald-500/30">NIVEAU 1</span>
-                            <span class="text-white font-bold">L'Analogie de la Boîte aux Lettres (Débutant)</span>
+                            <span
+                                class="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-2 py-1 rounded border border-emerald-500/30"
+                                data-i18n="s4.lvl1">NIVEAU
+                                1</span>
+                            <span class="text-white font-bold" data-i18n="s4.acc1.title">L'Analogie de la Boîte aux
+                                Lettres (Débutant)</span>
                         </div>
-                        <svg id="icon-acc-1" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg id="icon-acc-1" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div id="acc-1" class="accordion-content bg-slate-900/20">
-                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800">
+                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800"
+                            data-i18n="s4.acc1.desc">
                             Imaginez une boîte aux lettres.
                             <br><br>
                             <ul class="list-disc list-inside space-y-1">
-                                <li>Tout le monde peut y glisser une lettre (C'est la <strong>Clé Publique</strong>).</li>
-                                <li>Seul le propriétaire a la clé pour l'ouvrir et lire le courrier (C'est la <strong>Clé Privée</strong>).</li>
+                                <li>Tout le monde peut y glisser une lettre (C'est la <strong>Clé Publique</strong>).
+                                </li>
+                                <li>Seul le propriétaire a la clé pour l'ouvrir et lire le courrier (C'est la
+                                    <strong>Clé Privée</strong>).
+                                </li>
                             </ul>
                             <br>
-                            L'ordinateur quantique est comme un "passe-partout" magique capable d'ouvrir toutes les boîtes aux lettres, rendant le système inutile.
+                            L'ordinateur quantique est comme un "passe-partout" magique capable d'ouvrir toutes les
+                            boîtes aux lettres, rendant le système inutile.
                         </div>
                     </div>
                 </div>
 
                 <div class="glass rounded-xl overflow-hidden border border-slate-800">
-                    <button class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors" onclick="toggleAccordion('acc-2')">
+                    <button
+                        class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors"
+                        onclick="toggleAccordion('acc-2')">
                         <div class="flex items-center gap-3">
-                            <span class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-2 py-1 rounded border border-cyan-500/30">NIVEAU 2</span>
-                            <span class="text-white font-bold">Le Handshake TLS (Intermédiaire)</span>
+                            <span
+                                class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-2 py-1 rounded border border-cyan-500/30"
+                                data-i18n="s4.lvl2">NIVEAU
+                                2</span>
+                            <span class="text-white font-bold" data-i18n="s4.acc2.title">Le Handshake TLS
+                                (Intermédiaire)</span>
                         </div>
-                        <svg id="icon-acc-2" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg id="icon-acc-2" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div id="acc-2" class="accordion-content bg-slate-900/20">
-                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800">
+                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800"
+                            data-i18n="s4.acc2.desc">
                             Lorsque vous vous connectez à un site (HTTPS), une négociation se produit :
                             <br><br>
-                            1. <strong>Échange de clés (Asymétrique) :</strong> Le navigateur et le serveur utilisent RSA/ECC pour se mettre d'accord sur un code secret. C'est ici que réside la faille quantique.<br>
-                            2. <strong>Session chiffrée (Symétrique) :</strong> Une fois le code échangé, ils utilisent AES (rapide) pour chiffrer la conversation.<br><br>
-                            Si l'étape 1 est cassée par un ordinateur quantique, l'attaquant récupère la clé AES et déchiffre tout.
+                            1. <strong>Échange de clés (Asymétrique) :</strong> Le navigateur et le serveur utilisent
+                            RSA/ECC pour se mettre d'accord sur un code secret. C'est ici que réside la faille
+                            quantique.<br>
+                            2. <strong>Session chiffrée (Symétrique) :</strong> Une fois le code échangé, ils utilisent
+                            AES (rapide) pour chiffrer la conversation.<br><br>
+                            Si l'étape 1 est cassée par un ordinateur quantique, l'attaquant récupère la clé AES et
+                            déchiffre tout.
                         </div>
                     </div>
                 </div>
 
                 <div class="glass rounded-xl overflow-hidden border border-slate-800">
-                    <button class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors" onclick="toggleAccordion('acc-3')">
+                    <button
+                        class="w-full p-5 flex justify-between items-center bg-slate-900/30 hover:bg-slate-800/50 transition-colors"
+                        onclick="toggleAccordion('acc-3')">
                         <div class="flex items-center gap-3">
-                            <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded border border-purple-500/30">NIVEAU 3</span>
-                            <span class="text-white font-bold">Factorisation des Entiers (Expert)</span>
+                            <span
+                                class="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded border border-purple-500/30"
+                                data-i18n="s4.lvl3">NIVEAU
+                                3</span>
+                            <span class="text-white font-bold" data-i18n="s4.acc3.title">Factorisation des Entiers
+                                (Expert)</span>
                         </div>
-                        <svg id="icon-acc-3" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg id="icon-acc-3" class="chevron w-5 h-5 text-slate-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div id="acc-3" class="accordion-content bg-slate-900/20">
-                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 font-mono">
-                            RSA repose sur la difficulté de factoriser un grand nombre entier $N$ en deux nombres premiers $p$ et $q$ ($N = p \times q$).
+                        <div class="p-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 font-mono"
+                            data-i18n="s4.acc3.desc">
+                            RSA repose sur la difficulté de factoriser un grand nombre entier $N$ en deux nombres
+                            premiers $p$ et $q$ ($N = p \times q$).
                             <br><br>
-                            Pour un ordinateur classique, la complexité est sous-exponentielle. Pour une clé de 2048 bits, cela prendrait des millions d'années.<br>
-                            L'algorithme de Shor, exécuté sur un ordinateur quantique stable, transforme ce problème en complexité polynomiale.
+                            Pour un ordinateur classique, la complexité est sous-exponentielle. Pour une clé de 2048
+                            bits, cela prendrait des millions d'années.<br>
+                            L'algorithme de Shor, exécuté sur un ordinateur quantique stable, transforme ce problème en
+                            complexité polynomiale.
                             <br><br>
                             <span class="text-red-400">> Temps Classique : O(exp)</span><br>
                             <span class="text-emerald-400">> Temps Quantique : O((log N)^3)</span>
@@ -309,14 +515,14 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-orange-500 font-mono text-xl font-bold">05.</span>
-                <h2 class="text-2xl font-bold text-white">Simulateur : Casser RSA</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s5.title">Simulateur : Casser RSA</h2>
             </div>
 
             <div class="glass rounded-xl p-8 border border-slate-700 bg-gradient-to-b from-slate-900 to-slate-950">
                 <div class="mb-8">
                     <label class="block text-sm font-bold text-slate-400 mb-4 flex justify-between">
-                        <span>Taille de la Clé RSA</span>
-                        <span id="keySizeDisplay" class="text-cyan-400 font-mono">2048 bits</span>
+                        <span data-i18n="s5.keySize">Taille de la Clé RSA</span>
+                        <span id="keySizeDisplay" class="text-cyan-400 font-mono" data-i18n="s5.bits">2048 bits</span>
                     </label>
                     <input type="range" id="rsaRange" min="0" max="3" step="1" value="2" class="w-full">
                     <div class="flex justify-between text-xs text-slate-600 font-mono mt-2">
@@ -329,22 +535,31 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-slate-900 p-6 rounded-lg border border-slate-800 text-center">
-                        <p class="text-xs text-slate-500 uppercase font-bold mb-2">Ordinateur Classique</p>
-                        <p id="classicTime" class="text-2xl font-bold text-emerald-400">300 Millions d'années</p>
+                        <p class="text-xs text-slate-500 uppercase font-bold mb-2" data-i18n="s5.classicTitle">
+                            Ordinateur Classique</p>
+                        <p id="classicTime" class="text-2xl font-bold text-emerald-400" data-i18n="s5.classicTime">300
+                            Millions d'années</p>
                         <div class="w-full bg-slate-800 h-1.5 rounded-full mt-4">
                             <div class="bg-emerald-500 h-1.5 rounded-full w-px"></div>
                         </div>
-                        <p class="text-[10px] text-slate-600 mt-2">Invulnérable en pratique</p>
+                        <p class="text-[10px] text-slate-600 mt-2" data-i18n="s5.classicDesc">Invulnérable en pratique
+                        </p>
                     </div>
 
-                    <div class="bg-slate-900 p-6 rounded-lg border border-red-900/30 text-center relative overflow-hidden">
+                    <div
+                        class="bg-slate-900 p-6 rounded-lg border border-red-900/30 text-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-red-500/5 animate-pulse"></div>
-                        <p class="text-xs text-slate-500 uppercase font-bold mb-2 relative z-10">Ordinateur Quantique (Shor)</p>
-                        <p id="quantumTime" class="text-2xl font-bold text-red-400 relative z-10">8 Heures</p>
+                        <p class="text-xs text-slate-500 uppercase font-bold mb-2 relative z-10"
+                            data-i18n="s5.quantumTitle">Ordinateur Quantique
+                            (Shor)</p>
+                        <p id="quantumTime" class="text-2xl font-bold text-red-400 relative z-10"
+                            data-i18n="s5.quantumTime">8 Heures</p>
                         <div class="w-full bg-slate-800 h-1.5 rounded-full mt-4 relative z-10">
-                            <div class="bg-red-500 h-1.5 rounded-full w-full shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
+                            <div class="bg-red-500 h-1.5 rounded-full w-full shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                            </div>
                         </div>
-                        <p class="text-[10px] text-slate-600 mt-2 relative z-10">Sécurité brisée immédiatement</p>
+                        <p class="text-[10px] text-slate-600 mt-2 relative z-10" data-i18n="s5.quantumDesc">Sécurité
+                            brisée immédiatement</p>
                     </div>
                 </div>
             </div>
@@ -353,40 +568,54 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-blue-500 font-mono text-xl font-bold">06.</span>
-                <h2 class="text-2xl font-bold text-white">Timeline du Risque</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s6.title">Timeline du Risque</h2>
             </div>
 
             <div class="relative pl-4 timeline-line space-y-8">
                 <div class="relative pl-8 group">
-                    <div class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-cyan-500 transition-colors">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-slate-600 rounded-full flex items-center justify-center z-10 group-hover:border-cyan-500 transition-colors">
                         <div class="w-2 h-2 bg-slate-500 rounded-full group-hover:bg-cyan-400 transition-colors"></div>
                     </div>
-                    <h3 class="text-white font-bold text-lg">2024 - Préparation</h3>
-                    <p class="text-slate-400 text-sm mt-1">NIST finalise les standards PQC (FIPS 203/204). Les entreprises commencent l'inventaire crypto.</p>
+                    <h3 class="text-white font-bold text-lg" data-i18n="s6.t1.title">2024 - Préparation</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s6.t1.desc">NIST finalise les standards PQC (FIPS
+                        203/204). Les
+                        entreprises commencent l'inventaire crypto.</p>
                 </div>
 
                 <div class="relative pl-8 group">
-                    <div class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-emerald-600 rounded-full flex items-center justify-center z-10">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-emerald-600 rounded-full flex items-center justify-center z-10">
                         <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
                     </div>
-                    <h3 class="text-emerald-400 font-bold text-lg">2025 - Début de Migration</h3>
-                    <p class="text-slate-400 text-sm mt-1">Les navigateurs (Chrome, Firefox) et fournisseurs cloud activent PQC par défaut.</p>
+                    <h3 class="text-emerald-400 font-bold text-lg" data-i18n="s6.t2.title">2025 - Début de Migration
+                    </h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s6.t2.desc">Les navigateurs (Chrome, Firefox) et
+                        fournisseurs cloud
+                        activent PQC par défaut.</p>
                 </div>
 
                 <div class="relative pl-8 group">
-                    <div class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-orange-600 rounded-full flex items-center justify-center z-10">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-orange-600 rounded-full flex items-center justify-center z-10">
                         <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
                     </div>
-                    <h3 class="text-orange-400 font-bold text-lg">2030 - Zone de Danger (Y2Q)</h3>
-                    <p class="text-slate-400 text-sm mt-1">Les premières données "Harvested" commencent à être déchiffrées par des acteurs étatiques.</p>
+                    <h3 class="text-orange-400 font-bold text-lg" data-i18n="s6.t3.title">2030 - Zone de Danger (Y2Q)
+                    </h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s6.t3.desc">Les premières données "Harvested"
+                        commencent à être
+                        déchiffrées par des acteurs étatiques.</p>
                 </div>
 
                 <div class="relative pl-8 group">
-                    <div class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-red-600 rounded-full flex items-center justify-center z-10">
+                    <div
+                        class="absolute left-0 top-1.5 w-8 h-8 bg-slate-900 border-2 border-red-600 rounded-full flex items-center justify-center z-10">
                         <div class="w-2 h-2 bg-red-500 rounded-full"></div>
                     </div>
-                    <h3 class="text-red-400 font-bold text-lg">2035 - RSA Obsolète</h3>
-                    <p class="text-slate-400 text-sm mt-1">La cryptographie classique n'offre plus aucune protection. Seuls les systèmes hybrides/PQC survivent.</p>
+                    <h3 class="text-red-400 font-bold text-lg" data-i18n="s6.t4.title">2035 - RSA Obsolète</h3>
+                    <p class="text-slate-400 text-sm mt-1" data-i18n="s6.t4.desc">La cryptographie classique n'offre
+                        plus aucune protection.
+                        Seuls les systèmes hybrides/PQC survivent.</p>
                 </div>
             </div>
         </section>
@@ -394,15 +623,24 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-indigo-500 font-mono text-xl font-bold">07.</span>
-                <h2 class="text-2xl font-bold text-white">Testez vos Connaissances</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s7.title">Testez vos Connaissances</h2>
             </div>
 
             <div class="glass p-8 rounded-xl text-center" id="quizContainer">
-                <h3 class="text-xl font-bold text-white mb-4" id="quizQuestion">L'algorithme de Shor menace principalement :</h3>
+                <h3 class="text-xl font-bold text-white mb-4" id="quizQuestion" data-i18n="s7.q">L'algorithme de Shor
+                    menace
+                    principalement :</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="quizOptions">
-                    <button onclick="checkAnswer(0)" class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500">AES-256</button>
-                    <button onclick="checkAnswer(1)" class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500">RSA / ECC</button>
-                    <button onclick="checkAnswer(2)" class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500">SHA-256</button>
+                    <button onclick="checkAnswer(0)"
+                        class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500"
+                        data-i18n="s7.optA">AES-256</button>
+                    <button onclick="checkAnswer(1)"
+                        class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500"
+                        data-i18n="s7.optB">RSA
+                        / ECC</button>
+                    <button onclick="checkAnswer(2)"
+                        class="p-4 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all focus:ring-2 ring-cyan-500"
+                        data-i18n="s7.optC">SHA-256</button>
                 </div>
                 <div id="quizResult" class="hidden p-4 rounded bg-slate-900/50 border"></div>
             </div>
@@ -411,37 +649,42 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-pink-500 font-mono text-xl font-bold">08.</span>
-                <h2 class="text-2xl font-bold text-white">Algorithmes PQC Standardisés</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s8.title">Algorithmes PQC Standardisés</h2>
             </div>
 
             <div class="glass rounded-xl overflow-hidden border border-slate-800">
                 <table class="w-full text-left text-sm text-slate-400">
                     <thead class="bg-slate-900/50 text-xs uppercase font-bold text-slate-300">
                         <tr>
-                            <th class="px-6 py-4">Algorithme</th>
-                            <th class="px-6 py-4">Type</th>
-                            <th class="px-6 py-4">Usage</th>
-                            <th class="px-6 py-4">Niveau de Sécurité</th>
+                            <th class="px-6 py-4" data-i18n="s8.h1">Algorithme</th>
+                            <th class="px-6 py-4" data-i18n="s8.h2">Type</th>
+                            <th class="px-6 py-4" data-i18n="s8.h3">Usage</th>
+                            <th class="px-6 py-4" data-i18n="s8.h4">Niveau de Sécurité</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-800">
                         <tr class="hover:bg-slate-800/30 transition-colors">
                             <td class="px-6 py-4 font-mono text-emerald-400">ML-KEM (Kyber)</td>
                             <td class="px-6 py-4">Lattice-based</td>
-                            <td class="px-6 py-4">Key Encapsulation (Confidentialité)</td>
-                            <td class="px-6 py-4"><span class="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded text-xs">FIPS 203</span></td>
+                            <td class="px-6 py-4" data-i18n="s8.r1.use">Key Encapsulation (Confidentialité)</td>
+                            <td class="px-6 py-4"><span
+                                    class="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded text-xs">FIPS 203</span>
+                            </td>
                         </tr>
                         <tr class="hover:bg-slate-800/30 transition-colors">
                             <td class="px-6 py-4 font-mono text-purple-400">ML-DSA (Dilithium)</td>
                             <td class="px-6 py-4">Lattice-based</td>
-                            <td class="px-6 py-4">Signature (Authentification)</td>
-                            <td class="px-6 py-4"><span class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">FIPS 204</span></td>
+                            <td class="px-6 py-4" data-i18n="s8.r2.use">Signature (Authentification)</td>
+                            <td class="px-6 py-4"><span
+                                    class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">FIPS 204</span>
+                            </td>
                         </tr>
                         <tr class="hover:bg-slate-800/30 transition-colors">
                             <td class="px-6 py-4 font-mono text-blue-400">SLH-DSA (Sphincs+)</td>
                             <td class="px-6 py-4">Hash-based</td>
-                            <td class="px-6 py-4">Signature (Backup)</td>
-                            <td class="px-6 py-4"><span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">FIPS 205</span></td>
+                            <td class="px-6 py-4" data-i18n="s8.r3.use">Signature (Backup)</td>
+                            <td class="px-6 py-4"><span
+                                    class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">FIPS 205</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -451,28 +694,31 @@
         <section class="mb-16">
             <div class="flex items-center gap-4 mb-6">
                 <span class="text-yellow-500 font-mono text-xl font-bold">09.</span>
-                <h2 class="text-2xl font-bold text-white">Impact Business Réel</h2>
+                <h2 class="text-2xl font-bold text-white" data-i18n="s9.title">Impact Business Réel</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="glass p-6 rounded-xl border-t-4 border-blue-500">
-                    <h3 class="text-white font-bold mb-2">Finance</h3>
-                    <p class="text-sm text-slate-400 mb-4">Transactions bancaires, SWIFT, et Blockchain.</p>
-                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300">
+                    <h3 class="text-white font-bold mb-2" data-i18n="s9.c1.title">Finance</h3>
+                    <p class="text-sm text-slate-400 mb-4" data-i18n="s9.c1.desc">Transactions bancaires, SWIFT, et
+                        Blockchain.</p>
+                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300" data-i18n="s9.c1.risk">
                         Risque : Faux ordres de virement signés par ordinateur quantique.
                     </div>
                 </div>
                 <div class="glass p-6 rounded-xl border-t-4 border-green-500">
-                    <h3 class="text-white font-bold mb-2">Santé</h3>
-                    <p class="text-sm text-slate-400 mb-4">Dossiers patients chiffrés pour 50 ans.</p>
-                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300">
+                    <h3 class="text-white font-bold mb-2" data-i18n="s9.c2.title">Santé</h3>
+                    <p class="text-sm text-slate-400 mb-4" data-i18n="s9.c2.desc">Dossiers patients chiffrés pour 50
+                        ans.</p>
+                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300" data-i18n="s9.c2.risk">
                         Risque : Déchiffrement massif de données génétiques (HNDL).
                     </div>
                 </div>
                 <div class="glass p-6 rounded-xl border-t-4 border-slate-500">
-                    <h3 class="text-white font-bold mb-2">Gouvernement</h3>
-                    <p class="text-sm text-slate-400 mb-4">Secrets d'état et communications diplomatiques.</p>
-                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300">
+                    <h3 class="text-white font-bold mb-2" data-i18n="s9.c3.title">Gouvernement</h3>
+                    <p class="text-sm text-slate-400 mb-4" data-i18n="s9.c3.desc">Secrets d'état et communications
+                        diplomatiques.</p>
+                    <div class="text-xs bg-slate-900 p-2 rounded text-red-300" data-i18n="s9.c3.risk">
                         Risque : Espionnage rétroactif total.
                     </div>
                 </div>
@@ -480,8 +726,8 @@
         </section>
 
         <footer class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
-            <p class="mb-2">Réalisé par Madiane SAHLI</p>
-            <p class="text-xs">Basé sur les standards NIST FIPS 203/204/205</p>
+            <p class="mb-2" data-i18n="footer.built">Réalisé par Madiane SAHLI</p>
+            <p class="text-xs" data-i18n="footer.nist">Basé sur les standards NIST FIPS 203/204/205</p>
         </footer>
 
     </main>
@@ -491,14 +737,14 @@
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
-            
+
             // Close others (optional, for accordion effect)
             document.querySelectorAll('.accordion-content').forEach(el => {
                 if (el.id !== id) {
                     el.classList.remove('active');
                     // Reset icon rotation for others
                     const otherIcon = document.getElementById('icon-' + el.id);
-                    if(otherIcon) otherIcon.classList.remove('rotate');
+                    if (otherIcon) otherIcon.classList.remove('rotate');
                 }
             });
 
@@ -513,7 +759,7 @@
         const classicTime = document.getElementById('classicTime');
         const quantumTime = document.getElementById('quantumTime');
 
-        const simulationData = [
+        let simulationData = [
             { size: "512 bits", classic: "Quelques heures", quantum: "Instantané" },
             { size: "1024 bits", classic: "Quelques années", quantum: "Quelques secondes" },
             { size: "2048 bits", classic: "300 Millions d'années", quantum: "8 Heures" },
@@ -523,13 +769,13 @@
         rsaRange.addEventListener('input', (e) => {
             const index = e.target.value;
             const data = simulationData[index];
-            
+
             keySizeDisplay.innerText = data.size;
-            
+
             // Animation effect
             classicTime.style.opacity = 0;
             quantumTime.style.opacity = 0;
-            
+
             setTimeout(() => {
                 classicTime.innerText = data.classic;
                 quantumTime.innerText = data.quantum;
@@ -548,9 +794,9 @@
         function checkAnswer(index) {
             const resultDiv = document.getElementById('quizResult');
             const selection = quizOptions[index];
-            
-            resultDiv.classList.remove('hidden', 'bg-emerald-900/50', 'bg-red-900/50', 'border-emerald-500', 'border-red-500');
-            
+
+            resultDiv.classList.remove('hidden', 'bg-emerald-900/50', 'bg-red-900/50', 'border-emerald-500', 'border-red-500', 'text-emerald-300', 'text-red-300');
+
             if (selection.correct) {
                 resultDiv.classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
                 resultDiv.innerHTML = `<strong>${selection.text}</strong> : ${selection.msg}`;
@@ -567,10 +813,274 @@
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
         function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
         animateRing();
-        document.querySelectorAll('a, button, input').forEach(el => {
+        document.querySelectorAll('a, button, input, .nav-lang-toggle').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.classList.add('active'); ring.classList.add('active'); });
             el.addEventListener('mouseleave', () => { cursor.classList.remove('active'); ring.classList.remove('active'); });
         });
+
+        // --- I18N LOGIC ---
+        const i18n = {
+            fr: {
+                nav: { back: "Retour au Portfolio" },
+                hero: {
+                    title: "La Menace <span class='gradient-text'>Post-Quantique</span>",
+                    desc: "Pourquoi se mettre en conformité aujourd'hui pour une menace de demain ? Comprendre l'impact de l'algorithme de Shor et la stratégie \"Harvest Now, Decrypt Later\"."
+                },
+                s1: {
+                    title: "L'Urgence : Harvest Now, Decrypt Later",
+                    desc: "Même si l'ordinateur quantique \"cryptographiquement pertinent\" (CRQC) n'existe pas encore, vos données sont déjà en danger. Les attaquants interceptent et stockent le trafic chiffré aujourd'hui pour le déchiffrer dans 5, 10 ou 15 ans.",
+                    c1: { badge: "AUJOURD'HUI", title: "Interception", desc: "Collecte massive de données chiffrées (VPN, HTTPS, TLS)." },
+                    c2: { badge: "STOCKAGE", title: "Conservation", desc: "Les données dorment dans des serveurs en attente." },
+                    c3: { badge: "FUTUR (2030+)", title: "Déchiffrement", desc: "Shor casse la clé RSA/ECC et révèle les secrets." }
+                },
+                s2: {
+                    title: "Shor vs. Grover : Pourquoi RSA est \"Mort\"",
+                    c1: {
+                        title: "Algorithme de Shor", badge: "Impact Critique",
+                        desc: "<li>Cible la <strong class='text-white'>cryptographie asymétrique</strong>.</li><li>Rend obsolètes : <span class='font-mono text-cyan-400'>RSA, ECC, DH</span>.</li><li>Conséquence : Effondrement de PKI et HTTPS.</li>"
+                    },
+                    c2: {
+                        title: "Algorithme de Grover", badge: "Impact Modéré",
+                        desc: "<li>Cible la <strong class='text-white'>cryptographie symétrique</strong>.</li><li>Divise la force brute par 2 (racine carrée).</li><li>Solution : <strong class='text-white'>AES-128 → AES-256</strong>.</li>"
+                    }
+                },
+                s3: {
+                    title: "La Solution : Cryptographie Post-Quantique",
+                    desc: "Le NIST a standardisé de nouveaux algorithmes mathématiques (Lattice-based cryptography) résistants aux attaques quantiques.",
+                    c1: { desc: "Standard pour l'échange de clés (KEM)." },
+                    c2: { desc: "Standard pour la signature numérique et l'authentification." }
+                },
+                s4: {
+                    title: "Comprendre le Mécanisme",
+                    lvl1: "NIVEAU 1", lvl2: "NIVEAU 2", lvl3: "NIVEAU 3",
+                    acc1: {
+                        title: "L'Analogie de la Boîte aux Lettres (Débutant)",
+                        desc: "Imaginez une boîte aux lettres.<br><br><ul class='list-disc list-inside space-y-1'><li>Tout le monde peut y glisser une lettre (C'est la <strong>Clé Publique</strong>).</li><li>Seul le propriétaire a la clé pour l'ouvrir et lire le courrier (C'est la <strong>Clé Privée</strong>).</li></ul><br>L'ordinateur quantique est comme un \"passe-partout\" magique capable d'ouvrir toutes les boîtes aux lettres, rendant le système inutile."
+                    },
+                    acc2: {
+                        title: "Le Handshake TLS (Intermédiaire)",
+                        desc: "Lorsque vous vous connectez à un site (HTTPS), une négociation se produit :<br><br>1. <strong>Échange de clés (Asymétrique) :</strong> Le navigateur et le serveur utilisent RSA/ECC pour se mettre d'accord sur un code secret. C'est ici que réside la faille quantique.<br>2. <strong>Session chiffrée (Symétrique) :</strong> Une fois le code échangé, ils utilisent AES (rapide) pour chiffrer la conversation.<br><br>Si l'étape 1 est cassée par un ordinateur quantique, l'attaquant récupère la clé AES et déchiffre tout."
+                    },
+                    acc3: {
+                        title: "Factorisation des Entiers (Expert)",
+                        desc: "RSA repose sur la difficulté de factoriser un grand nombre entier $N$ en deux nombres premiers $p$ et $q$ ($N = p \\times q$).<br><br>Pour un ordinateur classique, la complexité est sous-exponentielle. Pour une clé de 2048 bits, cela prendrait des millions d'années.<br>L'algorithme de Shor, exécuté sur un ordinateur quantique stable, transforme ce problème en complexité polynomiale.<br><br><span class='text-red-400'>> Temps Classique : O(exp)</span><br><span class='text-emerald-400'>> Temps Quantique : O((log N)^3)</span>"
+                    }
+                },
+                s5: {
+                    title: "Simulateur : Casser RSA",
+                    keySize: "Taille de la Clé RSA",
+                    bits: "2048 bits",
+                    classicTitle: "Ordinateur Classique",
+                    quantumTitle: "Ordinateur Quantique (Shor)",
+                    classicTime: "300 Millions d'années",
+                    quantumTime: "8 Heures",
+                    classicDesc: "Invulnérable en pratique",
+                    quantumDesc: "Sécurité brisée immédiatement",
+                    simData: [
+                        { size: "512 bits", classic: "Quelques heures", quantum: "Instantané" },
+                        { size: "1024 bits", classic: "Quelques années", quantum: "Quelques secondes" },
+                        { size: "2048 bits", classic: "300 Millions d'années", quantum: "8 Heures" },
+                        { size: "4096 bits", classic: "Age de l'univers", quantum: "Quelques jours" }
+                    ]
+                },
+                s6: {
+                    title: "Timeline du Risque",
+                    t1: { title: "2024 - Préparation", desc: "NIST finalise les standards PQC (FIPS 203/204). Les entreprises commencent l'inventaire crypto." },
+                    t2: { title: "2025 - Début de Migration", desc: "Les navigateurs (Chrome, Firefox) et fournisseurs cloud activent PQC par défaut." },
+                    t3: { title: "2030 - Zone de Danger (Y2Q)", desc: "Les premières données \"Harvested\" commencent à être déchiffrées par des acteurs étatiques." },
+                    t4: { title: "2035 - RSA Obsolète", desc: "La cryptographie classique n'offre plus aucune protection. Seuls les systèmes hybrides/PQC survivent." }
+                },
+                s7: {
+                    title: "Testez vos Connaissances",
+                    q: "L'algorithme de Shor menace principalement :",
+                    optA: "AES-256", optB: "RSA / ECC", optC: "SHA-256"
+                },
+                s8: {
+                    title: "Algorithmes PQC Standardisés",
+                    h1: "Algorithme", h2: "Type", h3: "Usage", h4: "Niveau de Sécurité",
+                    r1: { use: "Key Encapsulation (Confidentialité)" },
+                    r2: { use: "Signature (Authentification)" },
+                    r3: { use: "Signature (Backup)" }
+                },
+                s9: {
+                    title: "Impact Business Réel",
+                    c1: { title: "Finance", desc: "Transactions bancaires, SWIFT, et Blockchain.", risk: "Risque : Faux ordres de virement signés par ordinateur quantique." },
+                    c2: { title: "Santé", desc: "Dossiers patients chiffrés pour 50 ans.", risk: "Risque : Déchiffrement massif de données génétiques (HNDL)." },
+                    c3: { title: "Gouvernement", desc: "Secrets d'état et communications diplomatiques.", risk: "Risque : Espionnage rétroactif total." }
+                },
+                footer: {
+                    built: "Réalisé par Madiane SAHLI",
+                    nist: "Basé sur les standards NIST FIPS 203/204/205"
+                }
+            },
+            en: {
+                nav: { back: "Back to Portfolio" },
+                hero: {
+                    title: "The <span class='gradient-text'>Post-Quantum</span> Threat",
+                    desc: "Why comply today for tomorrow's threat? Understand the impact of Shor's algorithm and the 'Harvest Now, Decrypt Later' strategy."
+                },
+                s1: {
+                    title: "The Urgency: Harvest Now, Decrypt Later",
+                    desc: "Even though a 'Cryptographically Relevant Quantum Computer' (CRQC) doesn't exist yet, your data is already at risk. Attackers are intercepting and storing encrypted traffic today to decrypt it in 5, 10, or 15 years.",
+                    c1: { badge: "TODAY", title: "Interception", desc: "Massive collection of encrypted data (VPN, HTTPS, TLS)." },
+                    c2: { badge: "STORAGE", title: "Retention", desc: "Data sleeps in dormant servers waiting for tomorrow." },
+                    c3: { badge: "FUTURE (2030+)", title: "Decryption", desc: "Shor breaks the RSA/ECC key and reveals the secrets." }
+                },
+                s2: {
+                    title: "Shor vs. Grover: Why RSA is 'Dead'",
+                    c1: {
+                        title: "Shor's Algorithm", badge: "Critical Impact",
+                        desc: "<li>Targets <strong class='text-white'>asymmetric cryptography</strong>.</li><li>Obsoletes: <span class='font-mono text-cyan-400'>RSA, ECC, DH</span>.</li><li>Outcome: Collapse of PKI and HTTPS.</li>"
+                    },
+                    c2: {
+                        title: "Grover's Algorithm", badge: "Moderate Impact",
+                        desc: "<li>Targets <strong class='text-white'>symmetric cryptography</strong>.</li><li>Halves the brute force effort (square root).</li><li>Fix: <strong class='text-white'>AES-128 → AES-256</strong>.</li>"
+                    }
+                },
+                s3: {
+                    title: "The Solution: Post-Quantum Cryptography",
+                    desc: "NIST has standardized new mathematical algorithms (Lattice-based cryptography) that resist quantum attacks.",
+                    c1: { desc: "Standard for Key Encapsulation (KEM)." },
+                    c2: { desc: "Standard for Digital Signatures and Authentication." }
+                },
+                s4: {
+                    title: "Understanding the Mechanism",
+                    lvl1: "LEVEL 1", lvl2: "LEVEL 2", lvl3: "LEVEL 3",
+                    acc1: {
+                        title: "The Mailbox Analogy (Beginner)",
+                        desc: "Imagine a mailbox.<br><br><ul class='list-disc list-inside space-y-1'><li>Anyone can drop a letter inside (This is the <strong>Public Key</strong>).</li><li>Only the owner has the key to open it and read the mail (This is the <strong>Private Key</strong>).</li></ul><br>A quantum computer is like a magical 'master key' capable of opening all mailboxes, rendering the system useless."
+                    },
+                    acc2: {
+                        title: "The TLS Handshake (Intermediate)",
+                        desc: "When you connect to a website (HTTPS), a negotiation occurs:<br><br>1. <strong>Key Exchange (Asymmetric):</strong> The browser and server use RSA/ECC to agree on a secret code. This is where the quantum vulnerability lies.<br>2. <strong>Encrypted Session (Symmetric):</strong> Once the code is exchanged, they use AES (fast) to encrypt the conversation.<br><br>If step 1 is broken by a quantum computer, the attacker recovers the AES key and decrypts everything."
+                    },
+                    acc3: {
+                        title: "Integer Factorization (Expert)",
+                        desc: "RSA relies on the difficulty of factorizing a large integer $N$ into two prime numbers $p$ and $q$ ($N = p \\times q$).<br><br>For a classical computer, the complexity is sub-exponential. For a 2048-bit key, it would take millions of years.<br>Shor's algorithm, running on a stable quantum computer, turns this into polynomial complexity.<br><br><span class='text-red-400'>> Classical Time: O(exp)</span><br><span class='text-emerald-400'>> Quantum Time: O((log N)^3)</span>"
+                    }
+                },
+                s5: {
+                    title: "Simulator: Breaking RSA",
+                    keySize: "RSA Key Size",
+                    bits: "2048 bits", // this will be reactive
+                    classicTitle: "Classical Computer",
+                    quantumTitle: "Quantum Computer (Shor)",
+                    classicTime: "300 Million Years",
+                    quantumTime: "8 Hours",
+                    classicDesc: "Practically invulnerable",
+                    quantumDesc: "Security immediately broken",
+                    simData: [
+                        { size: "512 bits", classic: "A few hours", quantum: "Instant" },
+                        { size: "1024 bits", classic: "A few years", quantum: "A few seconds" },
+                        { size: "2048 bits", classic: "300 Million years", quantum: "8 Hours" },
+                        { size: "4096 bits", classic: "Age of universe", quantum: "A few days" }
+                    ]
+                },
+                s6: {
+                    title: "Risk Timeline",
+                    t1: { title: "2024 - Preparation", desc: "NIST finalizes PQC standards (FIPS 203/204). Companies begin crypto inventory." },
+                    t2: { title: "2025 - Migration Starts", desc: "Browsers (Chrome, Firefox) and cloud providers enable PQC by default." },
+                    t3: { title: "2030 - Danger Zone (Y2Q)", desc: "The first 'Harvested' data starts being decrypted by nation-state actors." },
+                    t4: { title: "2035 - RSA Obsolete", desc: "Classical cryptography offers no protection. Only hybrid/PQC systems survive." }
+                },
+                s7: {
+                    title: "Test Your Knowledge",
+                    q: "Shor's algorithm primarily threatens:",
+                    optA: "AES-256", optB: "RSA / ECC", optC: "SHA-256"
+                },
+                s8: {
+                    title: "Standardized PQC Algorithms",
+                    h1: "Algorithm", h2: "Type", h3: "Usage", h4: "Security Level",
+                    r1: { use: "Key Encapsulation (Confidentiality)" },
+                    r2: { use: "Signature (Authentication)" },
+                    r3: { use: "Signature (Backup)" }
+                },
+                s9: {
+                    title: "Real Business Impact",
+                    c1: { title: "Finance", desc: "Banking transactions, SWIFT, and Blockchain.", risk: "Risk: Fake wire transfers signed by a quantum computer." },
+                    c2: { title: "Healthcare", desc: "Patient records encrypted for 50 years.", risk: "Risk: Massive decryption of genetic data (HNDL)." },
+                    c3: { title: "Government", desc: "State secrets and diplomatic communications.", risk: "Risk: Total retroactive espionage." }
+                },
+                footer: {
+                    built: "Created by Madiane SAHLI",
+                    nist: "Based on NIST FIPS 203/204/205 standards"
+                }
+            }
+        };
+
+        const langToggle = document.getElementById('langToggle');
+        const langOpts = document.querySelectorAll('.lang-opt');
+
+        function setLanguage(lang) {
+            if (!langOpts || !i18n[lang]) return;
+
+            langOpts.forEach(opt => {
+                if (opt.getAttribute('data-lang') === lang) {
+                    opt.classList.add('active');
+                } else {
+                    opt.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let text = i18n[lang];
+                keys.forEach(k => {
+                    if (text) text = text[k];
+                });
+                if (text) el.innerHTML = text;
+            });
+
+            // Update Quiz Logic Labels
+            if (lang === 'fr') {
+                quizOptions[0].msg = "Faux. AES est symétrique, vulnérable à Grover (faible impact).";
+                quizOptions[1].msg = "Correct ! RSA et ECC reposent sur la factorisation, que Shor brise facilement.";
+                quizOptions[2].msg = "Faux. SHA-256 est une fonction de hachage, peu affectée.";
+            } else {
+                quizOptions[0].msg = "False. AES is symmetric, vulnerable to Grover (low impact).";
+                quizOptions[1].msg = "Correct! RSA and ECC rely on factorization, which Shor easily breaks.";
+                quizOptions[2].msg = "False. SHA-256 is a hash function, largely unaffected.";
+            }
+
+            const resultDiv = document.getElementById('quizResult');
+            if (resultDiv && !resultDiv.classList.contains('hidden')) {
+                resultDiv.classList.add('hidden');
+            }
+
+            // Update Simulation Data global array
+            // The simulation UI expects this global array to work using index, but we just mutate it.
+            simulationData.length = 0; // clear current
+            i18n[lang].s5.simData.forEach(d => simulationData.push(d));
+
+            // Re-trigger the simulation event listener to force update labels according to the new language data
+            if (rsaRange) {
+                const event = new Event('input');
+                rsaRange.dispatchEvent(event);
+            }
+        }
+
+        langToggle.addEventListener('click', () => {
+            const activeEl = document.querySelector('.lang-opt.active');
+            if (!activeEl) return;
+            const currentLang = activeEl.getAttribute('data-lang');
+            setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+        });
+
+        langToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const activeEl = document.querySelector('.lang-opt.active');
+                if (!activeEl) return;
+                const currentLang = activeEl.getAttribute('data-lang');
+                setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+            }
+        });
+
+        // Set Default Language Safely (Without breaking DOM listeners loaded above)
+        setLanguage('fr');
+
     </script>
 </body>
+
 </html>
