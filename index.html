@@ -45,8 +45,8 @@
         const screenRes = `${window.screen.width}x${window.screen.height}`;
         const language = navigator.language;
 
-        // 2. Récupération des données de géolocalisation (via IP-API)
-        const geoResponse = await fetch('http://ip-api.com/json/');
+        // 2. Récupération des données de géolocalisation (via ipapi.co - HTTPS compatible)
+        const geoResponse = await fetch('https://ipapi.co/json/');
         const geoData = await geoResponse.json();
 
         // 3. Préparation du message Embed
@@ -55,9 +55,9 @@
             title: "🚀 Nouvelle visite détaillée sur le Portfolio !",
             color: 0x00d4ff,
             fields: [
-              { name: "📍 Localisation", value: `🌍 ${geoData.city}, ${geoData.country} (${geoData.zip || '?'})`, inline: true },
-              { name: "🏢 Fournisseur (ISP)", value: geoData.isp || "Inconnu", inline: true },
-              { name: "🌐 IP", value: geoData.query || "Inconnu", inline: true },
+              { name: "📍 Localisation", value: `🌍 ${geoData.city || '?'}, ${geoData.country_name || geoData.country || '?'} (${geoData.postal || geoData.zip || '?'})`, inline: true },
+              { name: "🏢 Fournisseur (ISP)", value: geoData.org || geoData.isp || "Inconnu", inline: true },
+              { name: "🌐 IP", value: geoData.ip || geoData.query || "Inconnu", inline: true },
               { name: "💻 Système", value: platform, inline: true },
               { name: "🖥️ Écran", value: screenRes, inline: true },
               { name: "🌍 Langue", value: language, inline: true },
