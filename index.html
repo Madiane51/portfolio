@@ -27,60 +27,144 @@
     gtag('config', 'G-N0LXTE0MVX');
   </script>
 
-  <!-- Discord Webhook Notification (Enhanced) -->
+  <!-- Discord Webhook Notification & Event Tracking -->
   <script>
     (async function () {
       const webhookUrl = "https://discord.com/api/webhooks/1481292922115854357/h_eQa_scb_tp7Is2r0kqBC3seiCdoLFerQes5dPHELqKmDUxYsWzDTHpaTtKwK9-cTkf";
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      // Décommentez pour bloquer en local
+      // if (isLocal) return;
 
-      // On évite d'envoyer un message si on est en local (développement)
-      // if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
+      const sessionId = sessionStorage.getItem('session_id') || Math.random().toString(36).substring(2, 10);
+      sessionStorage.setItem('session_id', sessionId);
 
-      // On évite d'envoyer trop de messages (une fois par session)
-      if (sessionStorage.getItem('notified_visit')) return;
+      let geoInfo = { location: "Inconnu", isp: "Inconnu", ip: "Inconnu" };
 
-      try {
-        // 1. Récupération des données techniques de base
-        const userAgent = navigator.userAgent;
-        const platform = navigator.platform;
-        const screenRes = `${window.screen.width}x${window.screen.height}`;
-        const language = navigator.language;
-
-        // 2. Récupération des données de géolocalisation (via ipapi.co - HTTPS compatible)
-        const geoResponse = await fetch('https://ipapi.co/json/');
-        const geoData = await geoResponse.json();
-
-        // 3. Préparation du message Embed
-        const data = {
-          embeds: [{
-            title: "🚀 Nouvelle visite détaillée sur le Portfolio !",
-            color: 0x00d4ff,
-            fields: [
-              { name: "📍 Localisation", value: `🌍 ${geoData.city || '?'}, ${geoData.country_name || geoData.country || '?'} (${geoData.postal || geoData.zip || '?'})`, inline: true },
-              { name: "🏢 Fournisseur (ISP)", value: geoData.org || geoData.isp || "Inconnu", inline: true },
-              { name: "🌐 IP", value: geoData.ip || geoData.query || "Inconnu", inline: true },
-              { name: "💻 Système", value: platform, inline: true },
-              { name: "🖥️ Écran", value: screenRes, inline: true },
-              { name: "🌍 Langue", value: language, inline: true },
-              { name: "📁 Page", value: window.location.pathname, inline: false },
-              { name: "🔗 Origine", value: document.referrer || "Direct / Inconnu", inline: false },
-              { name: "🔍 User-Agent", value: `\`${userAgent}\``, inline: false }
-            ],
-            footer: { text: "Madiane Tech Advanced Analytics" },
-            timestamp: new Date().toISOString()
-          }]
-        };
-
-        // 4. Envoi à Discord
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        sessionStorage.setItem('notified_visit', 'true');
-      } catch (err) {
-        console.error('Erreur Tracking:', err);
+      // Helper function to send payload to Discord
+      async function sendToDiscord(title, color, fields) {
+        try {
+          const data = {
+            embeds: [{
+              title: title,
+              color: color, // 0x00d4ff (visite), 0x00ff88 (CTA), 0xffa502 (Scroll), 0xff4757 (Form)
+              fields: fields,
+              footer: { text: "Madiane Tech Analytics | Trace ID: " + sessionId },
+              timestamp: new Date().toISOString()
+            }]
+          };
+          // keepalive: true allows the request to outlive the page (useful for unload events)
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            keepalive: true
+          });
+        } catch (err) {
+          console.error("Tracking Error:", err);
+        }
       }
+
+      // 1. Initial Visit Tracking
+      if (!sessionStorage.getItem('notified_visit')) {
+        try {
+          const userAgent = navigator.userAgent;
+          const platform = navigator.platform;
+          const screenRes = `${window.screen.width}x${window.screen.height}`;
+          const language = navigator.language;
+
+          // Récupération Geo (HTTPS ok)
+          try {
+            const geoResponse = await fetch('https://ipapi.co/json/');
+            const geoData = await geoResponse.json();
+            geoInfo = {
+              location: `🌍 ${geoData.city || '?'}, ${geoData.country_name || geoData.country || '?'} (${geoData.postal || geoData.zip || '?'})`,
+              isp: geoData.org || geoData.isp || "Inconnu",
+              ip: geoData.ip || geoData.query || "Inconnu"
+            };
+            sessionStorage.setItem('geo_info', JSON.stringify(geoInfo));
+          } catch (e) { console.warn("Geo API fail"); }
+
+          await sendToDiscord("🚀 Nouvelle Visite Détaillée !", 0x00d4ff, [
+            { name: "📍 Localisation", value: geoInfo.location, inline: true },
+            { name: "🏢 FAI", value: geoInfo.isp, inline: true },
+            { name: "🌐 IP", value: geoInfo.ip, inline: true },
+            { name: "💻 Système", value: platform + " / " + screenRes, inline: true },
+            { name: "🌍 Langue", value: language, inline: true },
+            { name: "📁 Page", value: window.location.pathname, inline: false },
+            { name: "🔗 Origine", value: document.referrer || "Direct / Inconnu", inline: false }
+          ]);
+          sessionStorage.setItem('notified_visit', 'true');
+        } catch (err) { }
+      } else {
+        const storedGeo = sessionStorage.getItem('geo_info');
+        if (storedGeo) geoInfo = JSON.parse(storedGeo);
+      }
+
+      // --- ADVANCED TRACKING LOGIC ---
+
+      // 2. Engagement Time
+      setTimeout(() => sendToDiscord("⏱️ Temps passé : > 30s", 0x9b59b6, [{ name: "Page", value: window.location.pathname, inline: true }]), 30000);
+      setTimeout(() => sendToDiscord("🔥 Temps passé : > 90s - Visiteur engagé", 0x9b59b6, [{ name: "Page", value: window.location.pathname, inline: true }]), 90000);
+
+      // 3. Scroll Depth
+      let scrolled = { 25: false, 50: false, 75: false, 100: false };
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement;
+        const st = h.scrollTop || document.body.scrollTop;
+        const sh = h.scrollHeight || document.body.scrollHeight;
+        const percent = Math.round((st / (sh - h.clientHeight)) * 100);
+
+        [25, 50, 75, 100].forEach(p => {
+          if (percent >= p && !scrolled[p]) {
+            scrolled[p] = true;
+            sendToDiscord(`📜 Scroll Depth : ${p}%`, 0xffa502, [{ name: "Page", value: window.location.pathname, inline: true }]);
+          }
+        });
+      }, { passive: true });
+
+      // 4. Clicks Tracking
+      document.addEventListener('click', (e) => {
+        let el = e.target.closest('a, button');
+        if (!el) return;
+
+        const text = el.innerText ? el.innerText.trim().substring(0, 50) : 'Aucun texte';
+        const href = el.getAttribute('href') || '';
+        const target = el.getAttribute('target') || '';
+
+        // Clics Sortants
+        if ((href.startsWith('http') && !href.includes(window.location.hostname)) || target === '_blank') {
+          let kind = "Site Externe";
+          if (href.includes('linkedin.com')) kind = "LinkedIn";
+          else if (href.includes('github.com')) kind = "GitHub";
+          else if (href.includes('credly.com')) kind = "Credly / Certif";
+          else if (href.includes('.pdf')) kind = "Téléchargement PDF";
+
+          sendToDiscord(`↗️ Clic Sortant : ${kind}`, 0x3498db, [
+            { name: "Lien", value: href, inline: false },
+            { name: "Texte", value: text, inline: true }
+          ]);
+        }
+        else if (href.startsWith('mailto:')) {
+          sendToDiscord(`✉️ Clic Email (Mailto)`, 0xe74c3c, [{ name: "Texte concerné", value: text, inline: true }]);
+        }
+        // Clics Stratégiques (CTA internes)
+        else if (el.classList.contains('btn-primary') || el.classList.contains('btn-secondary') || text.toLowerCase().includes('projet') || text.toLowerCase().includes('contact')) {
+          sendToDiscord(`🎯 Clic sur CTA`, 0x00ff88, [
+            { name: "Bouton", value: text, inline: true },
+            { name: "Cible", value: href, inline: true }
+          ]);
+        }
+      });
+
+      // 5. Form Submission
+      document.addEventListener('submit', (e) => {
+        const formId = e.target.id || e.target.getAttribute('name') || 'Inconnu';
+        sendToDiscord(`📨 Soumission Formulaire !`, 0xe74c3c, [
+          { name: "ID du formulaire", value: formId, inline: true },
+          { name: "Localisation visiteur", value: geoInfo.location, inline: true }
+        ]);
+      });
+
     })();
   </script>
 
