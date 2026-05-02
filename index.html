@@ -30,7 +30,8 @@
   <!-- Discord Webhook Notification & Event Tracking -->
   <script>
     (async function () {
-      const webhookUrl = "https://discord.com/api/webhooks/1481292922115854357/h_eQa_scb_tp7Is2r0kqBC3seiCdoLFerQes5dPHELqKmDUxYsWzDTHpaTtKwK9-cTkf";
+      // Le webhook n'est plus en clair ici. Il est sécurisé côté backend !
+      const apiUrl = "/api/notify";
       const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
       // Décommentez pour bloquer en local
       // if (isLocal) return;
@@ -40,7 +41,7 @@
 
       let geoInfo = { location: "Inconnu", isp: "Inconnu", ip: "Inconnu" };
 
-      // Helper function to send payload to Discord
+      // Helper function to send payload to backend API (which then sends to Discord)
       async function sendToDiscord(title, color, fields) {
         try {
           const data = {
@@ -52,8 +53,8 @@
               timestamp: new Date().toISOString()
             }]
           };
-          // keepalive: true allows the request to outlive the page (useful for unload events)
-          await fetch(webhookUrl, {
+          
+          await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
